@@ -23,7 +23,7 @@ namespace BotService
                 // Default store: volatile in-memory store - Only for prototyping!
                 // We provide adapters for Azure Table, CosmosDb, SQL Azure, or you can implement your own!
                 // For samples and documentation, see: [https://github.com/Microsoft/BotBuilder-Azure](https://github.com/Microsoft/BotBuilder-Azure)
-                var store = new InMemoryDataStore();
+                InMemoryDataStore store = new InMemoryDataStore();
 
                 // Other storage options
                 // var store = new TableBotDataStore("...DataStorageConnectionString..."); // requires Microsoft.BotBuilder.Azure Nuget package 

@@ -24,7 +24,7 @@ namespace BotService
             {
                 HandleSystemMessage(activity);
             }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
@@ -56,6 +56,6 @@ namespace BotService
             }
 
             return null;
-        }
+        }   
     }
 }
