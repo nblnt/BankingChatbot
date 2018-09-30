@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingChatbot.BotService", "BotService\BankingChatbot.BotService.csproj", "{3480441B-8B9C-4D62-8428-3FCE63269FEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingChatbot.EntityFramework", "BankingChatbot.EntityFramework\BankingChatbot.EntityFramework.csproj", "{0961478A-61AB-4414-BF30-7CDD6A60557C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3480441B-8B9C-4D62-8428-3FCE63269FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3480441B-8B9C-4D62-8428-3FCE63269FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3480441B-8B9C-4D62-8428-3FCE63269FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0961478A-61AB-4414-BF30-7CDD6A60557C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0961478A-61AB-4414-BF30-7CDD6A60557C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0961478A-61AB-4414-BF30-7CDD6A60557C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0961478A-61AB-4414-BF30-7CDD6A60557C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

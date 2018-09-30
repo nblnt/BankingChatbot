@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using BankingChatbot.EntityFramework;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
@@ -8,23 +11,24 @@ namespace BotService.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        public Task StartAsync(IDialogContext context)
+        public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
-
-            return Task.CompletedTask;
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            Activity activity = await result as Activity;
+            Activity message = await result as Activity;
+            if (message.Text.ToLower().Contains("balance"))
+            {
+                await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
+            }
 
-            // Calculate something for us to return
-            int length = (activity.Text ?? string.Empty).Length;
+            context.Wait(MessageReceivedAsync);
+        }
 
-            // Return our reply to the user
-            await context.PostAsync($"You sent {activity.Text} which was {length} characters");
-
+        private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)
+        {
             context.Wait(MessageReceivedAsync);
         }
     }
