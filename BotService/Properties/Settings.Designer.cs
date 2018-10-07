@@ -43,7 +43,7 @@ namespace BotService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.99")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
         public double LuisIntentScoreMinimum {
             get {
                 return ((double)(this["LuisIntentScoreMinimum"]));

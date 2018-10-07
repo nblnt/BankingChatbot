@@ -15,7 +15,7 @@ namespace BotService.Dialogs
         [LuisIntent("Greeting")]
         public async Task GreetAsync(IDialogContext context, LuisResult result)
         {
-            if (CheckIntentScore(result.TopScoringIntent.Score))
+            if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 await context.PostAsync("Hi there");
                 context.Wait(MessageReceived); 
@@ -29,7 +29,7 @@ namespace BotService.Dialogs
         [LuisIntent("GetAccountBalance")]
         public async Task BalanceAsync(IDialogContext context, LuisResult result)
         {
-            if (CheckIntentScore(result.TopScoringIntent.Score))
+            if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 var message = new Activity(text: result.Query);
                 await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
@@ -58,7 +58,7 @@ namespace BotService.Dialogs
             context.Wait(MessageReceived);
         }
 
-        private bool CheckIntentScore(double? score)
+        private bool CheckMinimumIntentScore(double? score)
         {
             if (score != null)
             {
