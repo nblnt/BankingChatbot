@@ -19,7 +19,7 @@ namespace BotService.Controllers
         {
             if (activity.GetActivityType() == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new RootDialog());                
+                await Conversation.SendAsync(activity, () => new IntentDialog());
             }
             else
             {
@@ -57,6 +57,6 @@ namespace BotService.Controllers
             }
 
             return null;
-        }   
+        }
     }
 }

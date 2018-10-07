@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.EntityFramework;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs

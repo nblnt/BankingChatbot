@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BankingChatbot.EntityFramework")]
+[assembly: AssemblyTitle("BankingChatbot.TextStorage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BankingChatbot.EntityFramework")]
+[assembly: AssemblyProduct("BankingChatbot.TextStorage")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0961478a-61ab-4414-bf30-7cdd6a60557c")]
+[assembly: Guid("c90a80d5-47ba-41f3-bcb0-64b4cc36797e")]
 
 // Version information for an assembly consists of the following four values:
 //
