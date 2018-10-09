@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingChatbot.TextStorage"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingChatbot.Commons", "BankingChatbot.Commons\BankingChatbot.Commons.csproj", "{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingChatbot.EntityFramework", "BankingChatbot.EntityFramework\BankingChatbot.EntityFramework.csproj", "{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

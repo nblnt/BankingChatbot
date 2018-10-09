@@ -200,6 +200,10 @@
       <Project>{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}</Project>
       <Name>BankingChatbot.Commons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankingChatbot.EntityFramework\BankingChatbot.EntityFramework.csproj">
+      <Project>{15f1fd22-6fb0-4c35-89d2-5d6c988dd89c}</Project>
+      <Name>BankingChatbot.EntityFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
