@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BankingChatbot.Commons.Enum;
 using BotService.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -38,6 +39,25 @@ namespace BotService.Dialogs
             {
                 await AnswerNoneAsync(context);
             }
+        }
+
+        [LuisIntent("GetCardLimit")]
+        public async Task GetCardLimitAsync(IDialogContext context, LuisResult result)
+        {
+            if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
+            {
+                context.Call(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterChildDialogAsync);
+            }
+            else
+            {
+                await AnswerNoneAsync(context);
+            }
+        }
+
+        [LuisIntent("SetCardLimit")]
+        public async Task SetCardLimitAsync(IDialogContext context, LuisResult result)
+        {
+            throw new NotImplementedException();
         }
 
         [LuisIntent("None")]

@@ -45,15 +45,10 @@ namespace BotService.Dialogs
         private async Task OnOptionSelectedAsync(IDialogContext context, IAwaitable<string> result)
         {
             //bug: rögtön lefut a metódus, nem csak választás után
-            string selectedAccount = await result;
+            var selectedAccount = await result;
             int balance = userAccounts.Where(x => x.AccountNumber == selectedAccount).Select(x => x.Balance).Single();
             await context.PostAsync($"Your balance is : {balance}");
 
-        }
-
-        private async Task ResumeAfterFooDialog(IDialogContext context, IAwaitable<object> result)
-        {
-            context.Wait(MessageReceivedAsync);
         }
 
         private async Task WriteOutBalanceAsync(IDialogContext context, int balance)
