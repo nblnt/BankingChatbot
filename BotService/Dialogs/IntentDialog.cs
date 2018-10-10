@@ -46,7 +46,8 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                context.Call(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterChildDialogAsync);
+                var message = new Activity(text: result.Query);
+                await context.Forward(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterChildDialogAsync, message);
             }
             else
             {

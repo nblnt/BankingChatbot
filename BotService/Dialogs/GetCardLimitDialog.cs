@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
@@ -33,7 +34,8 @@ namespace BotService.Dialogs
             ;
             using (var dbContext = new BankingChatbotDataContext())
             {
-                UserCards = dbContext.DebitCards.Where(x => x.Account.ClientId == UserId).ToList();
+                UserCards = dbContext.DebitCards.Include(x => x.Account).Include(x => x.DebitCardType)
+                    .Where(x => x.Account.ClientId == UserId).ToList();
             }
 
             if (UserCards.Count == 1)
@@ -47,7 +49,7 @@ namespace BotService.Dialogs
             }
             else
             {
-                await context.Forward(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync, message);
+                context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
             }
         }
 
