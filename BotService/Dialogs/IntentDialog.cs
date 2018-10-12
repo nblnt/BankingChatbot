@@ -9,8 +9,8 @@ using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs
 {
-    [LuisModel("86814b35-602d-4b50-91c1-280144f8e9b5", "5754ccecd67d462a95192fbce4209492")]
     [Serializable]
+    [LuisModel("86814b35-602d-4b50-91c1-280144f8e9b5", "5754ccecd67d462a95192fbce4209492")]
     public class IntentDialog : LuisDialog<object>
     {
         [LuisIntent("Greeting")]
@@ -18,8 +18,7 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                await context.PostAsync("Hi there");
-                context.Wait(MessageReceived); 
+                await context.PostAsync("Hi there");                
             }
             else
             {
@@ -34,6 +33,7 @@ namespace BotService.Dialogs
             {
                 var message = new Activity(text: result.Query);
                 await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
+                context.Done(true);
             }
             else
             {
@@ -48,6 +48,7 @@ namespace BotService.Dialogs
             {
                 var message = new Activity(text: result.Query);
                 await context.Forward(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterChildDialogAsync, message);
+                context.Done(true);
             }
             else
             {
@@ -71,7 +72,6 @@ namespace BotService.Dialogs
         {
             await context.PostAsync("I don't get it!");
             await context.PostAsync("Could you be more accurate please?");
-            context.Wait(MessageReceived);
         }
 
         private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)

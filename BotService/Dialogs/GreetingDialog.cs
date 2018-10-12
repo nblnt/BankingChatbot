@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
-using BankingChatbot.Commons.Util;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs
 {
     [Serializable]
-    public class SetCardLimitDialog : IDialog<CardLimitModificationResult>
+    public class GreetingDialog : IDialog<object>
     {
-        public async Task StartAsync(IDialogContext context)
+        public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
+            return Task.CompletedTask;
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)

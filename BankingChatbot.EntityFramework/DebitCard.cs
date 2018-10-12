@@ -6,6 +6,7 @@ namespace BankingChatbot.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Serializable]
     public partial class DebitCard
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

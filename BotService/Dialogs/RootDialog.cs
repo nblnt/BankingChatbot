@@ -20,8 +20,10 @@ namespace BotService.Dialogs
             {
                 await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
             }
-
-            context.Wait(MessageReceivedAsync);
+            else
+            {
+                context.Wait(MessageReceivedAsync);
+            }
         }
 
         private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)

@@ -11,7 +11,7 @@ namespace BotService.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             await context.PostAsync("You have more than one card, please select one from the list below!");
-            context.Wait(MessageReceivedAsync);//bug: nem itt várja az üzenetet
+            context.Wait(MessageReceivedAsync);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)

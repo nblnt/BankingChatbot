@@ -1,5 +1,8 @@
-﻿namespace BankingChatbot.Commons.Enum
+﻿using System;
+
+namespace BankingChatbot.Commons.Enum
 {
+    [Serializable]
     public enum CardLimitType
     {
         PurchaseLimit = 0,
