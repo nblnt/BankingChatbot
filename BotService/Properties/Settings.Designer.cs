@@ -49,5 +49,14 @@ namespace BotService.Properties {
                 return ((double)(this["LuisIntentScoreMinimum"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseEntityFramework {
+            get {
+                return ((bool)(this["UseEntityFramework"]));
+            }
+        }
     }
 }

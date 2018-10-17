@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15F1FD22-6FB0-4C35-89D2-5D6C988DD89C}</ProjectGuid>
+    <ProjectGuid>{805F46AA-0561-43A6-BB91-7BAF7761F6DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankingChatbot.EntityFramework</RootNamespace>
-    <AssemblyName>BankingChatbot.EntityFramework</AssemblyName>
+    <RootNamespace>BankingChatBot.DAL</RootNamespace>
+    <AssemblyName>BankingChatBot.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -50,15 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="BankingChatbotDataContext.cs" />
-    <Compile Include="Branch.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientContact.cs" />
-    <Compile Include="ContactType.cs" />
-    <Compile Include="Currency.cs" />
-    <Compile Include="DebitCard.cs" />
-    <Compile Include="DebitCardType.cs" />
+    <Compile Include="EntityFramework\DAL.cs" />
+    <Compile Include="EntityFramework\Model\Account.cs" />
+    <Compile Include="EntityFramework\BankingChatbotDataContext.cs" />
+    <Compile Include="EntityFramework\Model\Branch.cs" />
+    <Compile Include="EntityFramework\Model\Client.cs" />
+    <Compile Include="EntityFramework\Model\ClientContact.cs" />
+    <Compile Include="EntityFramework\Model\ContactType.cs" />
+    <Compile Include="EntityFramework\Model\Currency.cs" />
+    <Compile Include="EntityFramework\Model\DebitCard.cs" />
+    <Compile Include="EntityFramework\Model\DebitCardType.cs" />
+    <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

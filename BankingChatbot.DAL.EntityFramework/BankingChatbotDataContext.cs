@@ -1,4 +1,4 @@
-namespace BankingChatbot.EntityFramework
+namespace BankingChatbot.DAL.EntityFramework
 {
     using System;
     using System.Data.Entity;

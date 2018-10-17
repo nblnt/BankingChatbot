@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BankingChatbot.EntityFramework;
+using BankingChatBot.DAL.EntityFramework;
+using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs
 {
     [Serializable]
-    public class AccountBalanceDialog : IDialog<object>
+    public class AccountBalanceDialog : DialogBase<object>
     {
         private List<Account> userAccounts;
 
         private Account selectedAccount;
 
-        public async Task StartAsync(IDialogContext context)
+        public override async Task StartAsync(IDialogContext context)
         {
             context.Wait(this.MessageReceivedAsync);
         }

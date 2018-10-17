@@ -1,11 +1,9 @@
-namespace BankingChatbot.EntityFramework
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
+namespace BankingChatBot.DAL.EntityFramework.Model
+{
     [Serializable]
     public partial class Client
     {

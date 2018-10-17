@@ -5,14 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
 using BankingChatbot.Commons.Util;
-using BankingChatbot.EntityFramework;
+using BankingChatBot.DAL.EntityFramework;
+using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs
 {
     [Serializable]
-    public class GetCardLimitDialog : IDialog<object>
+    public class GetCardLimitDialog : DialogBase<object>
     {
         private readonly int? UserId;
 
@@ -23,7 +24,7 @@ namespace BotService.Dialogs
             UserId = userId;
         }
 
-        public async Task StartAsync(IDialogContext context)
+        public override async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
         }
@@ -53,6 +54,7 @@ namespace BotService.Dialogs
             }
             else
             {
+                await context.PostAsync("You have more than one card!");
                 await context.Forward(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync, message);
             }
         }
@@ -90,7 +92,7 @@ namespace BotService.Dialogs
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
         {
             int cardId = await result;
-            await PostLimitInformationAsync(context, cardId);
+            //await PostLimitInformationAsync(context, cardId);
             context.Done(new object());
         }
     }

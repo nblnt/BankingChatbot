@@ -7,9 +7,9 @@ using Microsoft.Bot.Connector;
 namespace BotService.Dialogs
 {
     [Serializable]
-    public class SetCardLimitDialog : IDialog<CardLimitModificationResult>
+    public class SetCardLimitDialog : DialogBase<CardLimitModificationResult>
     {
-        public async Task StartAsync(IDialogContext context)
+        public override async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
         }

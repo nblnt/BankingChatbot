@@ -1,4 +1,4 @@
-namespace BankingChatbot.EntityFramework
+namespace BankingChatbot.DAL.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,6 @@ namespace BankingChatbot.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Serializable]
     public partial class ClientContact
     {
         public int ClientContactId { get; set; }

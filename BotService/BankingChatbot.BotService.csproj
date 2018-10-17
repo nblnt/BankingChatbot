@@ -165,6 +165,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dialogs\AccountBalanceDialog.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\DialogBase.cs" />
     <Compile Include="Dialogs\GetCardLimitDialog.cs" />
     <Compile Include="Dialogs\GreetingDialog.cs" />
     <Compile Include="Dialogs\IntentDialog.cs" />
@@ -201,9 +202,9 @@
       <Project>{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}</Project>
       <Name>BankingChatbot.Commons</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankingChatbot.EntityFramework\BankingChatbot.EntityFramework.csproj">
-      <Project>{15f1fd22-6fb0-4c35-89d2-5d6c988dd89c}</Project>
-      <Name>BankingChatbot.EntityFramework</Name>
+    <ProjectReference Include="..\BankingChatBot.DAL\BankingChatBot.DAL.csproj">
+      <Project>{805F46AA-0561-43A6-BB91-7BAF7761F6DA}</Project>
+      <Name>BankingChatBot.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
