@@ -11,24 +11,17 @@ namespace BotService.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
+
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            Activity message = await result as Activity;
-            if (message.Text.ToLower().Contains("balance"))
-            {
-                await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
-            }
-            else
-            {
-                context.Wait(MessageReceivedAsync);
-            }
+            await context.Forward(new IntentDialog(), ResumeAfterChildDialogAsync, await result);
         }
 
         private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)
         {
-            context.Wait(MessageReceivedAsync);
+            context.Call(new IntentDialog(), ResumeAfterChildDialogAsync);
         }
     }
 }

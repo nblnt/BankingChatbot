@@ -44,8 +44,7 @@ namespace BotService.Dialogs
             {
                 int cardId = UserCards.Single().DebitCardId;
                 await PostLimitInformationAsync(context, cardId);
-                PromptDialog.Confirm(context, ResuseAfterSetLimitConfirmDialogAsync,
-                    "Do you wish to change the settings of your card?", "I don't get it!");
+                
             }
             else if (UserCards.Count == 0)
             {
@@ -59,24 +58,9 @@ namespace BotService.Dialogs
             }
         }
 
-        private async Task ResuseAfterSetLimitConfirmDialogAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            bool changeSettings = await result;
-            if (changeSettings)
-            {
-                context.Call(new SetCardLimitDialog(), ResumeAfterSetCardLimitDialogAsync);
-            }
-            else
-            {
-                await context.PostAsync("Ok, your card limits won't be changed!");
-                context.Done(new object());
-            }
-        }
+        
 
-        private async Task ResumeAfterSetCardLimitDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
-        {
-            CardLimitModificationResult modificationData = await result;
-        }
+        
 
         private async Task PostLimitInformationAsync(IDialogContext context, int cardId)
         {
@@ -92,7 +76,7 @@ namespace BotService.Dialogs
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
         {
             int cardId = await result;
-            //await PostLimitInformationAsync(context, cardId);
+            await PostLimitInformationAsync(context, cardId);
             context.Done(new object());
         }
     }

@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Autofac;
 using BotService.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -29,9 +31,9 @@ namespace BotService.Controllers
             return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private async Task<Activity> HandleSystemMessage(Activity activity)
         {
-            string messageType = message.GetActivityType();
+            string messageType = activity.GetActivityType();
             if (messageType == ActivityTypes.DeleteUserData)
             {
                 // Implement user deletion here
@@ -42,6 +44,28 @@ namespace BotService.Controllers
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
+                IConversationUpdateActivity update = activity;
+                using (var scope = Microsoft.Bot.Builder.Dialogs.Internals.DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                {
+                    var client = scope.Resolve<IConnectorClient>();
+                    if (update.MembersAdded.Any())
+                    {
+                        var reply = activity.CreateReply();
+                        //foreach (var newMember in update.MembersAdded)
+                        //{
+                        //    if (newMember.Id != activity.Recipient.Id)
+                        //    {
+                        //        string message = "";
+                        //        message += $"Hi,\n";
+                        //        reply.Text = message;
+                        //        await client.Conversations.ReplyToActivityAsync(reply);
+                        //    }
+                        //}
+                        string greeting = "Hi, what can I help you?";
+                        reply.Text = greeting;
+                        await client.Conversations.ReplyToActivityAsync(reply);
+                    }
+                }
             }
             else if (messageType == ActivityTypes.ContactRelationUpdate)
             {

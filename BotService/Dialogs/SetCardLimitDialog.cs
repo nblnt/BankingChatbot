@@ -11,12 +11,13 @@ namespace BotService.Dialogs
     {
         public override async Task StartAsync(IDialogContext context)
         {
+            await context.PostAsync("Set card limit dialog");
             context.Wait(MessageReceivedAsync);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            throw new NotImplementedException();
+            context.Done<CardLimitModificationResult>(null);//todo: ne maradjon így
         }
     }
 }
