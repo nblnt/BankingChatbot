@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
 using BankingChatbot.Commons.Util;
+using BankingChatbot.TextStorage;
 using BotService.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -19,7 +20,7 @@ namespace BotService.Dialogs
         {            
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                await context.PostAsync("Hi there");                
+                await context.PostAsync(TextProvider.Resolve(TextCategory.GREETING));                
             }
             else
             {

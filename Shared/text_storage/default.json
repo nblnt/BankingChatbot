@@ -1,0 +1,24 @@
+{
+	"storageName" : "default",
+	"createdBy" : "Nagy Bálint",
+	"language" : "HUN",
+	"valid" : true,
+	"storage" : [
+		{
+			"category" : "GREETING",
+			"texts" : [
+				"Hello!",
+				"Hi!",
+				"Welcome!",
+				"Hey"				
+			]
+		},
+		{
+			"category" : "COMMON_NotValidOption",
+			"texts" : [
+				"This option is not valid!",
+				"This is not valid input! Please be more accurate!"				
+			]
+		},
+	]
+}

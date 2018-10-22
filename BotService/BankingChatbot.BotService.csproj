@@ -208,6 +208,10 @@
       <Project>{805F46AA-0561-43A6-BB91-7BAF7761F6DA}</Project>
       <Name>BankingChatBot.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankingChatbot.TextStorage\BankingChatbot.TextStorage.csproj">
+      <Project>{C90A80D5-47BA-41F3-BCB0-64B4CC36797E}</Project>
+      <Name>BankingChatbot.TextStorage</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
