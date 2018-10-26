@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BankingChatbot.TextStorage;
 using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
@@ -40,15 +41,16 @@ namespace BotService.Dialogs
             }
             else
             {
-                await context.PostAsync("You don't have any account to inspect!");
+                await context.PostAsync(TextProvider.Provide(TextCategory.ACCOUNTBALANCE_ZeroAccount));
                 context.Done(true);
             }
         }
 
         private void ShowUserAccountsOptions(IDialogContext context)
-        {            
+        {
             PromptDialog.Choice(context, this.OnOptionSelectedAsync, userAccounts.Select(x => x.AccountNumber).ToList(),
-                "You have more than one accounts! Please choose one!", "Not valid option!");
+                TextProvider.Provide(TextCategory.ACCOUNTBALANCE_MoreThanOneAccount),
+                TextProvider.Provide(TextCategory.COMMON_NotValidOption));
         }
 
         private async Task OnOptionSelectedAsync(IDialogContext context, IAwaitable<string> result)
@@ -61,7 +63,8 @@ namespace BotService.Dialogs
 
         private async Task WriteOutBalanceAsync(IDialogContext context, Account account)
         {
-            await context.PostAsync($"Your balance is : {account.Balance} {account.Currency}");
+            await context.PostAsync(TextProvider.Provide(TextCategory.ACCOUNTBALANCE_BalanceIs) +
+                                    $"{account.Balance} {account.Currency}");
         }
 
         

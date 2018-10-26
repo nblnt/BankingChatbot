@@ -15,12 +15,12 @@ namespace BankingChatbot.TextStorage
             _storage = _storageLoader.Storage;
         }
 
-        public static string Resolve(TextCategory category, int specifiedTextIndex = -1)
+        public static string Provide(TextCategory category, int specifiedTextIndex = -1)
         {
             TextStorageItem textsByCategory = _storage.Storage.SingleOrDefault(x => x.Category == category);
             if (textsByCategory != null)
             {
-                int maxIndex = textsByCategory.Texts.Count - 1;
+                int maxIndex = textsByCategory.Texts.Count;
                 int index;
                 if (specifiedTextIndex == -1)
                 {
@@ -33,7 +33,7 @@ namespace BankingChatbot.TextStorage
                 else
                 {
                     throw new ArgumentOutOfRangeException(
-                        $"There is only {maxIndex + 1} text item in the {category.ToString()} category. {specifiedTextIndex} is out of this range");
+                        $"There is only {maxIndex} text item in the {category.ToString()} category. {specifiedTextIndex} is out of this range");
                 }
                 string retVal = textsByCategory.Texts[index];
                 return retVal;

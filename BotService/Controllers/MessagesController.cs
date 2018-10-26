@@ -51,19 +51,16 @@ namespace BotService.Controllers
                     if (update.MembersAdded.Any())
                     {
                         var reply = activity.CreateReply();
-                        //foreach (var newMember in update.MembersAdded)
-                        //{
-                        //    if (newMember.Id != activity.Recipient.Id)
-                        //    {
-                        //        string message = "";
-                        //        message += $"Hi,\n";
-                        //        reply.Text = message;
-                        //        await client.Conversations.ReplyToActivityAsync(reply);
-                        //    }
-                        //}
-                        string greeting = "Hi, what can I help you?";
-                        reply.Text = greeting;
-                        await client.Conversations.ReplyToActivityAsync(reply);
+                        foreach (var newMember in update.MembersAdded)
+                        {
+                            if (newMember.Id != activity.Recipient.Id)
+                            {
+                                string greeting = "Hi, what can I help you?";
+                                reply.Text = greeting;
+                                await client.Conversations.ReplyToActivityAsync(reply);
+                            }
+                        }
+                        
                     }
                 }
             }

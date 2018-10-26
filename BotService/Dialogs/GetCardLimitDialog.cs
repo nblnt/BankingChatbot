@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
 using BankingChatbot.Commons.Util;
+using BankingChatbot.TextStorage;
 using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
@@ -48,19 +49,15 @@ namespace BotService.Dialogs
             }
             else if (UserCards.Count == 0)
             {
-                await context.PostAsync("You don't have a card to inspect!");
+                await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_ZeroCard));
                 context.Done(new object());
             }
             else
             {
-                await context.PostAsync("You have more than one card!");
+                await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_MoreThanOneCard));
                 await context.Forward(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync, message);
             }
         }
-
-        
-
-        
 
         private async Task PostLimitInformationAsync(IDialogContext context, int cardId)
         {
@@ -68,9 +65,12 @@ namespace BotService.Dialogs
             string cardTypeName = card.DebitCardType.Type;
             int withdrawLimit = card.DailyCashWithdrawalLimit ?? 0;
             int purchaseLimit = card.DailyPaymentLimit ?? 0;
+            string currency = card.Account.Currency;
 
-            await context.PostAsync($"Your {cardTypeName} card's cash withdrawal limit is {withdrawLimit}");
-            await context.PostAsync($"Your {cardTypeName} card's purchase limit is {purchaseLimit}");
+            await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_WithDrawalLimit) + withdrawLimit +
+                                    " " + currency);
+            await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_PurchaseLimit) + purchaseLimit +
+                                    " " + currency);
         }
 
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Util;
+using BankingChatbot.TextStorage;
 using Microsoft.Bot.Builder.Dialogs;
 
 namespace BotService.Dialogs
@@ -9,7 +10,7 @@ namespace BotService.Dialogs
     {
         private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)
         {
-            await context.PostAsync("Can I help you something more?");
+            await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_HelpMore));
             context.Wait(MessageReceived);
         }
 
@@ -17,7 +18,8 @@ namespace BotService.Dialogs
         {
             await result;
             PromptDialog.Confirm(context, ResumeAfterSetLimitConfirmDialogAsync,
-                "Do you wish to change the settings of your card?", "I don't get it!");
+                TextProvider.Provide(TextCategory.SETCARDLIMIT_WishToChange),
+                TextProvider.Provide(TextCategory.COMMON_NotUnderstandable));
         }
 
         private async Task ResumeAfterSetLimitConfirmDialogAsync(IDialogContext context, IAwaitable<bool> result)
@@ -29,7 +31,7 @@ namespace BotService.Dialogs
             }
             else
             {
-                await context.PostAsync("Ok, your card limits won't be changed!");
+                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_WontChange));
             }
         }
 
@@ -40,8 +42,7 @@ namespace BotService.Dialogs
 
         private async Task AskForAccurateInput(IDialogContext context)
         {
-            await context.PostAsync("I don't get it!");
-            await context.PostAsync("Could you be more accurate please?");
+            await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_AskingMoreAccurateInput));
         }
     }
 }

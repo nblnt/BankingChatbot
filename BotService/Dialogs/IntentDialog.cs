@@ -20,12 +20,11 @@ namespace BotService.Dialogs
         {            
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                await context.PostAsync(TextProvider.Resolve(TextCategory.GREETING));                
+                await context.PostAsync(TextProvider.Provide(TextCategory.GREETING));                
             }
             else
             {
-                await context.PostAsync("I don't get it!");
-                await context.PostAsync("Could you be more accurate please?");
+                await AskForAccurateInput(context);
             }
         }
 
@@ -63,7 +62,7 @@ namespace BotService.Dialogs
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 var message = new Activity(text: result.Query);
-                await context.Forward(new SetCardLimitDialog() /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitDialogAsync, message);
+                context.Call(new SetCardLimitDialog() /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitDialogAsync);
             }
             else
             {

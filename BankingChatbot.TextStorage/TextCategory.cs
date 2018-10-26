@@ -6,6 +6,10 @@
         COMMON_Error,
         COMMON_NotUnderstandable,
         COMMON_AskingMoreAccurateInput,
+        COMMON_HelpMore,
+
+        INTERRUPTION_Help,
+        INTERRUPTION_Cancel,   
 
         GREETING,
 
@@ -17,9 +21,11 @@
         GETCARDLIMIT_ZeroCard,
         GETCARDLIMIT_WithDrawalLimit,
         GETCARDLIMIT_PurchaseLimit,
-        GETCARDLIMIT_ChangeIsNotRequires,
 
         SELECTCARD_PleaseSelect,
-        SELECTCARD_InvalidCard
+        SELECTCARD_InvalidCard,
+
+        SETCARDLIMIT_WishToChange,
+        SETCARDLIMIT_WontChange,
     }
 }
