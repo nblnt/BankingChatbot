@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BankingChatbot.TextStorage;
 using BankingChatBot.DAL;
 using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
@@ -16,21 +17,15 @@ namespace BotService.Dialogs
 
         public override async Task StartAsync(IDialogContext context)
         {
-            context.Wait(ReplyWithCardSelectorAsync);
-        }
-
-        private async Task ReplyWithCardSelectorAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            await result;
             List<DebitCard> clientDebitCards = DAL.GetClientDebitCards(1);
 
             IMessageActivity selectCardReply = context.MakeMessage();
             //itt állítjuk be, hogy görgethető legyen
             selectCardReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            selectCardReply.Text = "Please select a card below!";
+            selectCardReply.Text = TextProvider.Provide(TextCategory.SELECTCARD_PleaseSelect);
             selectCardReply.Attachments = new List<Attachment>();
 
-            foreach (var card in clientDebitCards)
+            foreach (DebitCard card in clientDebitCards)
             {
                 List<CardImage> cardImages = new List<CardImage>();
                 List<CardAction> cardButtons = new List<CardAction>();
@@ -64,7 +59,7 @@ namespace BotService.Dialogs
             }
             else
             {
-                await context.PostAsync("Card identifier is invalid!");
+                await context.PostAsync(TextProvider.Provide(TextCategory.SELECTCARD_InvalidCardIdentifier));
                 context.Done(-1); 
             }
         }

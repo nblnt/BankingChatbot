@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
+using BankingChatbot.TextStorage;
 using BotService.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -45,18 +46,17 @@ namespace BotService.Controllers
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
                 IConversationUpdateActivity update = activity;
-                using (var scope = Microsoft.Bot.Builder.Dialogs.Internals.DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                using (ILifetimeScope scope = Microsoft.Bot.Builder.Dialogs.Internals.DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                 {
-                    var client = scope.Resolve<IConnectorClient>();
+                    IConnectorClient client = scope.Resolve<IConnectorClient>();
                     if (update.MembersAdded.Any())
                     {
-                        var reply = activity.CreateReply();
-                        foreach (var newMember in update.MembersAdded)
+                        Activity reply = activity.CreateReply();
+                        foreach (ChannelAccount newMember in update.MembersAdded)
                         {
                             if (newMember.Id != activity.Recipient.Id)
                             {
-                                string greeting = "Hi, what can I help you?";
-                                reply.Text = greeting;
+                                reply.Text = TextProvider.Provide(TextCategory.GREETING_UserAdded);
                                 await client.Conversations.ReplyToActivityAsync(reply);
                             }
                         }

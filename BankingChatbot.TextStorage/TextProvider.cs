@@ -5,19 +5,17 @@ namespace BankingChatbot.TextStorage
 {
     public static class TextProvider
     {
-        private static TextStorageLoader _storageLoader;
-
-        private static TextStorage _storage;
+        private static readonly TextStorage Storage;
 
         static TextProvider()
         {
-            _storageLoader = new TextStorageLoader();
-            _storage = _storageLoader.Storage;
+            TextStorageLoader storageLoader = new TextStorageLoader();
+            Storage = storageLoader.Storage;
         }
 
         public static string Provide(TextCategory category, int specifiedTextIndex = -1)
         {
-            TextStorageItem textsByCategory = _storage.Storage.SingleOrDefault(x => x.Category == category);
+            TextStorageItem textsByCategory = Storage.Storage.SingleOrDefault(x => x.Category == category);
             if (textsByCategory != null)
             {
                 int maxIndex = textsByCategory.Texts.Count;

@@ -14,6 +14,13 @@
 			]
 		},
 		{
+			"category": "GREETING_UserAdded",
+			"texts": [
+				"Welcome! Can I help you!",
+				"Welcome! What can I do for you?"
+			]
+		},
+		{
 			"category": "COMMON_NotValidOption",
 			"texts": [
 				"This option is not valid!"
@@ -77,6 +84,18 @@
 			]
 		},
 		{
+			"category": "SELECTCARD_PleaseSelect",
+			"texts": [
+				"Please select a card below!"
+			]
+		},
+		{
+			"category": "SELECTCARD_InvalidCardIdentifier",
+			"texts": [
+				"Card identifier is invalid!"
+			]
+		},
+		{
 			"category": "GETCARDLIMIT_MoreThanOneCard",
 			"texts": [
 				"You have more than one card!"
@@ -111,6 +130,36 @@
 			"texts": [
 				"Ok, your card limits wont't be changed!"
 			]
-		}
+		},
+		{
+			"category": "SETCARDLIMIT_TooManyAttempt",
+			"texts": [
+				"You've given me too many invalid answer! I'll take it as no!"
+			]
+		},
+		{
+			"category": "SETCARDLIMIT_PleaseSelectLimitType",
+			"texts": [
+				"Please select which type of limit you want to change!"
+			]
+		},
+		{
+			"category": "SETCARDLIMIT_PurchaseLimitDesc",
+			"texts": [
+				"Purchase Limit"
+			]
+		},
+		{
+			"category": "SETCARDLIMIT_WithDrawalLimitDesc",
+			"texts": [
+				"Cash Withdrawal Limit"
+			]
+		},
+		{
+			"category": "SETCARDLIMIT_BothLimitTypeDesc",
+			"texts": [
+				"Both"
+			]
+		},
 	]
 }

@@ -24,14 +24,21 @@ namespace BotService.Dialogs
 
         private async Task ResumeAfterSetLimitConfirmDialogAsync(IDialogContext context, IAwaitable<bool> result)
         {
-            bool changeSettings = await result;
-            if (changeSettings)
+            try
             {
-                context.Call(new SetCardLimitDialog(), ResumeAfterSetCardLimitDialogAsync);
+                bool changeSettings = await result;
+                if (changeSettings)
+                {
+                    context.Call(new SetCardLimitDialog(1)/*todo:ide majd kellhet egy speckó visszatérési típus*/, ResumeAfterSetCardLimitDialogAsync);
+                }
+                else
+                {
+                    await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_WontChange));
+                }
             }
-            else
+            catch (TooManyAttemptsException)
             {
-                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_WontChange));
+                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_TooManyAttempt));                
             }
         }
 

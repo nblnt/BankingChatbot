@@ -33,7 +33,7 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                var message = new Activity(text: result.Query);
+                Activity message = new Activity(text: result.Query);
                 await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
             }
             else
@@ -47,7 +47,7 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                var message = new Activity(text: result.Query);
+                Activity message = new Activity(text: result.Query);
                 await context.Forward(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterGetCardLimitDialogAsync, message);
             }
             else
@@ -61,8 +61,8 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                var message = new Activity(text: result.Query);
-                context.Call(new SetCardLimitDialog() /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitDialogAsync);
+                Activity message = new Activity(text: result.Query);
+                context.Call(new SetCardLimitDialog(1) /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitDialogAsync);
             }
             else
             {

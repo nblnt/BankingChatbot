@@ -24,7 +24,7 @@ namespace BotService.Dialogs
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            using (var dbContext = new BankingChatbotDataContext())
+            using (BankingChatbotDataContext dbContext = new BankingChatbotDataContext())
             {
                 userAccounts = dbContext.Accounts.Where(x => x.ClientId == 1).ToList();
             }
@@ -48,14 +48,14 @@ namespace BotService.Dialogs
 
         private void ShowUserAccountsOptions(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.OnOptionSelectedAsync, userAccounts.Select(x => x.AccountNumber).ToList(),
+            PromptDialog.Choice(context, OnOptionSelectedAsync, userAccounts.Select(x => x.AccountNumber).ToList(),
                 TextProvider.Provide(TextCategory.ACCOUNTBALANCE_MoreThanOneAccount),
                 TextProvider.Provide(TextCategory.COMMON_NotValidOption));
         }
 
         private async Task OnOptionSelectedAsync(IDialogContext context, IAwaitable<string> result)
         {
-            var selectedAccountNumber = await result;
+            string selectedAccountNumber = await result;
             Account selectedAccount = userAccounts.Single(x => x.AccountNumber == selectedAccountNumber);
             await WriteOutBalanceAsync(context, selectedAccount);
             context.Done(true);

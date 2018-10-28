@@ -24,12 +24,12 @@ namespace BotService.Dialogs
             IMessageActivity message = item as IMessageActivity;
             if (message != null && !string.IsNullOrWhiteSpace(message.Text))
             {
-                if (message.Text.Equals("help", StringComparison.InvariantCultureIgnoreCase))
+                if (message.Text.Equals("help", StringComparison.InvariantCultureIgnoreCase) ||
+                    message.Text.Equals("info", StringComparison.InvariantCultureIgnoreCase))
                 {
                     return message.Text;
                 }
             }
-
             return null;
         }
 

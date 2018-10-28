@@ -16,13 +16,13 @@ namespace BotService.Dialogs
     [Serializable]
     public class GetCardLimitDialog : DialogBase<object>
     {
-        private readonly int? UserId;
+        private readonly int _clientId;
 
-        private List<DebitCard> UserCards;
+        private List<DebitCard> _clientDebitCards;
 
-        public GetCardLimitDialog(int? userId)
+        public GetCardLimitDialog(int clientId)
         {
-            UserId = userId;
+            _clientId = clientId;
         }
 
         public override async Task StartAsync(IDialogContext context)
@@ -32,36 +32,32 @@ namespace BotService.Dialogs
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var message = await result;
+            IMessageActivity message = await result;
 
-            ;
-            using (var dbContext = new BankingChatbotDataContext())
-            {
-                UserCards = dbContext.DebitCards.Include(x => x.Account).Include(x => x.DebitCardType)
-                    .Where(x => x.Account.ClientId == UserId).ToList();
-            }
+            _clientDebitCards = DAL.GetClientDebitCards(_clientId);
 
-            if (UserCards.Count == 1)
+            switch (_clientDebitCards.Count)
             {
-                int cardId = UserCards.Single().DebitCardId;
-                await PostLimitInformationAsync(context, cardId);
-                
-            }
-            else if (UserCards.Count == 0)
-            {
-                await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_ZeroCard));
-                context.Done(new object());
-            }
-            else
-            {
-                await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_MoreThanOneCard));
-                await context.Forward(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync, message);
+                case 1:
+                {
+                    int cardId = _clientDebitCards.Single().DebitCardId;
+                    await PostLimitInformationAsync(context, cardId);
+                    break;
+                }
+                case 0:
+                    await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_ZeroCard));
+                    context.Done<object>(null);
+                    break;
+                default:
+                    await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_MoreThanOneCard));
+                    context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
+                    break;
             }
         }
 
         private async Task PostLimitInformationAsync(IDialogContext context, int cardId)
         {
-            DebitCard card = UserCards.Single(x => x.DebitCardId == cardId);
+            DebitCard card = _clientDebitCards.Single(x => x.DebitCardId == cardId);
             string cardTypeName = card.DebitCardType.Type;
             int withdrawLimit = card.DailyCashWithdrawalLimit ?? 0;
             int purchaseLimit = card.DailyPaymentLimit ?? 0;
@@ -77,7 +73,7 @@ namespace BotService.Dialogs
         {
             int cardId = await result;
             await PostLimitInformationAsync(context, cardId);
-            context.Done(new object());
+            context.Done<object>(null);
         }
     }
 }

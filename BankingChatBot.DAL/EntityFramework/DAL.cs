@@ -11,10 +11,13 @@ namespace BankingChatBot.DAL.EntityFramework
     {
         public List<DebitCard> GetClientDebitCards(int clientId)
         {
-            using (var db = new BankingChatbotDataContext())
+            using (BankingChatbotDataContext db = new BankingChatbotDataContext())
             {
-                return db.DebitCards.Where(x => x.Account.Client.ClientId == clientId).Include(x => x.Account)
-                    .Include(x => x.DebitCardType).ToList();
+                return db.DebitCards
+                    .Where(x => x.Account.Client.ClientId == clientId)
+                    .Include(x => x.Account)
+                    .Include(x => x.DebitCardType)
+                    .ToList();
             }
         }
     }
