@@ -1,165 +1,207 @@
 {
 	"storageName": "default",
 	"createdBy": "Nagy Bálint",
-	"language": "HUN",
+	"language": "ENG",
 	"valid": true,
-	"storage": [
-		{
-			"category": "GREETING",
-			"texts": [
-				"Hello!",
-				"Hi!",
-				"Welcome!",
-				"Hey"
-			]
-		},
-		{
-			"category": "GREETING_UserAdded",
-			"texts": [
-				"Welcome! Can I help you!",
-				"Welcome! What can I do for you?"
-			]
-		},
-		{
-			"category": "COMMON_NotValidOption",
-			"texts": [
-				"This option is not valid!"
-			]
-		},
-		{
-			"category": "COMMON_NotUnderstandable",
-			"texts": [
-				"I don't unterstand!",
-				"Sorry, I failed to understand your message."
-			]
-		},
-		{
-			"category": "COMMON_AskingMoreAccurateInput",
-			"texts": [
-				"I don't unterstand! Please be more accurate!",
-				"Sorry, I failed to understand your message. Please, try another input!"
-			]
-		},
-		{
-			"category": "COMMON_HelpMore",
-			"texts": [
-				"Can I help you with something more?"
-			]
-		},
-		{
-			"category": "COMMON_Error",
-			"texts": [
-				"Sorry! An error happened! I will restart this conversation!"
-			]
-		},
-		{
-			"category": "INTERRUPTION_Help",
-			"texts": [
-				"This is your help message!"
-			]
-		},
-		{
-			"category": "INTERRUPTION_Cancel",
-			"texts": [
-				"The conversation has restarted!"
-			]
-		},
-		{
-			"category": "ACCOUNTBALANCE_ZeroAccount",
-			"texts": [
-				"You don't have any account to inspect!"
-			]
-		},
-		{
-			"category": "ACCOUNTBALANCE_MoreThanOneAccount",
-			"texts": [
-				"You have more than one accounts! Please choose one!"
-			]
-		},
-		{
-			"category": "ACCOUNTBALANCE_BalanceIs",
-			"texts": [
-				"Your balance is: ",
-				"You have "
-			]
-		},
-		{
-			"category": "SELECTCARD_PleaseSelect",
-			"texts": [
-				"Please select a card below!"
-			]
-		},
-		{
-			"category": "SELECTCARD_InvalidCardIdentifier",
-			"texts": [
-				"Card identifier is invalid!"
-			]
-		},
-		{
-			"category": "GETCARDLIMIT_MoreThanOneCard",
-			"texts": [
-				"You have more than one card!"
-			]
-		},
-		{
-			"category": "GETCARDLIMIT_ZeroCard",
-			"texts": [
-				"You don't have a card to inspect!"
-			]
-		},
-		{
-			"category": "GETCARDLIMIT_WithDrawalLimit",
-			"texts": [
-				"Your card's daily withdrawal limit is "
-			]
-		},
-		{
-			"category": "GETCARDLIMIT_PurchaseLimit",
-			"texts": [
-				"Your card's daily purchase limit is "
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_WishToChange",
-			"texts": [
-				"Do you wish to change the settings of your card?"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_WontChange",
-			"texts": [
-				"Ok, your card limits wont't be changed!"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_TooManyAttempt",
-			"texts": [
-				"You've given me too many invalid answer! I'll take it as no!"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_PleaseSelectLimitType",
-			"texts": [
-				"Please select which type of limit you want to change!"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_PurchaseLimitDesc",
-			"texts": [
-				"Purchase Limit"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_WithDrawalLimitDesc",
-			"texts": [
-				"Cash Withdrawal Limit"
-			]
-		},
-		{
-			"category": "SETCARDLIMIT_BothLimitTypeDesc",
-			"texts": [
-				"Both"
-			]
-		},
-	]
+  "storage": [
+    {
+      "category": "GREETING",
+      "texts": [
+        "Hello!",
+        "Hi!",
+        "Welcome!",
+        "Hey"
+      ]
+    },
+    {
+      "category": "GREETING_UserAdded",
+      "texts": [
+        "Welcome! Can I help you!",
+        "Welcome! What can I do for you?"
+      ]
+    },
+    {
+      "category": "COMMON_NotValidOption",
+      "texts": [
+        "This option is not valid!"
+      ]
+    },
+    {
+      "category": "COMMON_NotUnderstandable",
+      "texts": [
+        "I don't unterstand!",
+        "Sorry, I failed to understand your message."
+      ]
+    },
+    {
+      "category": "COMMON_AskingMoreAccurateInput",
+      "texts": [
+        "I don't unterstand! Please be more accurate!",
+        "Sorry, I failed to understand your message. Please, try another input!"
+      ]
+    },
+    {
+      "category": "COMMON_HelpMore",
+      "texts": [
+        "Can I help you with something more?"
+      ]
+    },
+    {
+      "category": "COMMON_Error",
+      "texts": [
+        "Sorry! An error happened! I will restart this conversation!"
+      ]
+    },
+    {
+      "category": "INTERRUPTION_Help",
+      "texts": [
+        "This is your help message!"
+      ]
+    },
+    {
+      "category": "INTERRUPTION_Cancel",
+      "texts": [
+        "The conversation has restarted!"
+      ]
+    },
+    {
+      "category": "ACCOUNTBALANCE_ZeroAccount",
+      "texts": [
+        "You don't have any account to inspect!"
+      ]
+    },
+    {
+      "category": "ACCOUNTBALANCE_MoreThanOneAccount",
+      "texts": [
+        "You have more than one accounts! Please choose one!"
+      ]
+    },
+    {
+      "category": "ACCOUNTBALANCE_BalanceIs",
+      "texts": [
+        "Your balance is: ",
+        "You have "
+      ]
+    },
+    {
+      "category": "SELECTCARD_PleaseSelect",
+      "texts": [
+        "Please select a card below!"
+      ]
+    },
+    {
+      "category": "SELECTCARD_InvalidCardIdentifier",
+      "texts": [
+        "Card identifier is invalid!"
+      ]
+    },
+    {
+      "category": "GETCARDLIMIT_MoreThanOneCard",
+      "texts": [
+        "You have more than one card!"
+      ]
+    },
+    {
+      "category": "GETCARDLIMIT_ZeroCard",
+      "texts": [
+        "You don't have a card to inspect!"
+      ]
+    },
+    {
+      "category": "GETCARDLIMIT_WithdrawalLimit",
+      "texts": [
+        "Your card's daily withdrawal limit is "
+      ]
+    },
+    {
+      "category": "GETCARDLIMIT_PurchaseLimit",
+      "texts": [
+        "Your card's daily purchase limit is "
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_WishToChange",
+      "texts": [
+        "Do you wish to change the settings of your card?"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_WontChange",
+      "texts": [
+        "Ok, your card limits wont't be changed!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_TooManyAttempt",
+      "texts": [
+        "You've given me too many invalid answer! I'll take it as no!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_PleaseSelectLimitType",
+      "texts": [
+        "Please select which type of limit you want to change!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_PurchaseLimitDesc",
+      "texts": [
+        "Purchase Limit"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_WithDrawalLimitDesc",
+      "texts": [
+        "Cash Withdrawal Limit"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_BothLimitTypeDesc",
+      "texts": [
+        "Both"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_InvalidAmount",
+      "texts": [
+        "Invalid input! Try again!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_InputPurchaseLimit",
+      "texts": [
+        "Please type your new purchase limit amount!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_InputWithdrawalLimit",
+      "texts": [
+        "Please type your new cash withdrawal limit amount!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_PurchaseLimitChanged",
+      "texts": [
+        "The purchase limit changed to "
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_WithdrawalLimitChanged",
+      "texts": [
+        "The cash withdrawal limit changed to "
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_OldPurchaseLimit",
+      "texts": [
+        "The card's current daily purchase limit is "
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_OldWithdrawalLimit",
+      "texts": [
+        "The card's current daily withdrawal limit is "
+      ]
+    }
+  ]
 }

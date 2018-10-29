@@ -67,5 +67,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankingChatbot.Commons\BankingChatbot.Commons.csproj">
+      <Project>{BF3CE3A3-4F27-4D78-8D75-8F6B8E2D22AF}</Project>
+      <Name>BankingChatbot.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

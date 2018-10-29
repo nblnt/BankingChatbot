@@ -177,6 +177,7 @@
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\SelectCardDialog.cs" />
     <Compile Include="Dialogs\SetCardLimitDialog.cs" />
+    <Compile Include="Dialogs\SetCardLimitInitializationDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

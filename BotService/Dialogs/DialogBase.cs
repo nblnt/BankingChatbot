@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using BankingChatBot.DAL;
-using BankingChatBot.DAL.EntityFramework;
 using BotService.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 
@@ -10,7 +9,7 @@ namespace BotService.Dialogs
     [Serializable]
     public abstract class DialogBase<T> : IDialog<T>
     {
-        protected IDAL DAL;
+        protected IDAL DAL { get; }
 
         protected DialogBase()
         {

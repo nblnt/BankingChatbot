@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BankingChatbot.Commons.Util;
 using BankingChatbot.TextStorage;
 using Microsoft.Bot.Builder.Dialogs;
@@ -29,7 +28,7 @@ namespace BotService.Dialogs
                 bool changeSettings = await result;
                 if (changeSettings)
                 {
-                    context.Call(new SetCardLimitDialog(1)/*todo:ide majd kellhet egy speckó visszatérési típus*/, ResumeAfterSetCardLimitDialogAsync);
+                    context.Call(new SetCardLimitInitializationDialog(1)/*todo:ide majd kellhet egy speckó visszatérési típus*/, ResumeAfterSetCardLimitInitializationDialogAsync);
                 }
                 else
                 {
@@ -42,7 +41,7 @@ namespace BotService.Dialogs
             }
         }
 
-        private async Task ResumeAfterSetCardLimitDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
+        private async Task ResumeAfterSetCardLimitInitializationDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
         {
             CardLimitModificationResult modificationData = await result;
         }

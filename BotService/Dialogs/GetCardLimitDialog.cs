@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using BankingChatbot.Commons.Enum;
-using BankingChatbot.Commons.Util;
 using BankingChatbot.TextStorage;
-using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -63,7 +59,7 @@ namespace BotService.Dialogs
             int purchaseLimit = card.DailyPaymentLimit ?? 0;
             string currency = card.Account.Currency;
 
-            await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_WithDrawalLimit) + withdrawLimit +
+            await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_WithdrawalLimit) + withdrawLimit +
                                     " " + currency);
             await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_PurchaseLimit) + purchaseLimit +
                                     " " + currency);

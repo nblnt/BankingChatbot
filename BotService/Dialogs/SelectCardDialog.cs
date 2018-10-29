@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.TextStorage;
-using BankingChatBot.DAL;
-using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;

@@ -1,5 +1,4 @@
-﻿using System;
-using BankingChatbot.TextStorage;
+﻿using BankingChatbot.TextStorage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BankingChatbot.Test

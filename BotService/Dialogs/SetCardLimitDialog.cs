@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
 using BankingChatbot.Commons.Util;
@@ -13,102 +12,75 @@ namespace BotService.Dialogs
     [Serializable]
     public class SetCardLimitDialog : DialogBase<CardLimitModificationResult>
     {
-        private enum Options
+        private int _cardId;
+
+        private DebitCard _selectedCard;
+
+        private string _cardCurrencyIso;
+
+        private CardLimitType _limitType;
+
+        public SetCardLimitDialog(int cardId, CardLimitType limitType)
         {
-            OnlyClientSelected,
-            ClientAndCardSelected,
-            ClientAndLimitTypeSelected
-        }
-
-        private Options _options;
-
-        private readonly int _clientId;
-
-        private List<DebitCard> _userDebitCards;
-
-        private int? _selectedCardId;
-
-        private CardLimitType _cardLimitType;
-
-        public SetCardLimitDialog(int clientId)
-        {
-            _options = Options.OnlyClientSelected;
-            _clientId = clientId;
-        }
-
-        public SetCardLimitDialog(int clientId, int selectedCardId)
-        {
-            _options = Options.ClientAndCardSelected;
-            _clientId = clientId;
-            _selectedCardId = selectedCardId;
-        }
-
-        public SetCardLimitDialog(int clientId, CardLimitType cardLimitType)
-        {
-            _options = Options.ClientAndLimitTypeSelected;
-            _clientId = clientId;
-            _cardLimitType = cardLimitType;
+            _cardId = cardId;
+            _limitType = limitType;
+            _selectedCard = DAL.GetDebitCard(_cardId);
+            _cardCurrencyIso = DAL.GetIsoCurrency(_cardId);
         }
 
         public override async Task StartAsync(IDialogContext context)
         {
-            //context.Wait(MessageReceivedAsync);
-            _userDebitCards = DAL.GetClientDebitCards(_clientId);
-            switch (_options)
+            switch (_limitType)
             {
-                case Options.OnlyClientSelected:
-                    if (_userDebitCards.Count > 1)
-                    {
-                        context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
-                    }
-                    else
-                    {
-                        context.Done<CardLimitModificationResult>(null);//todo: ide nem ez kell majd
-                    }
+                case CardLimitType.PurchaseLimit:
+                    await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_OldPurchaseLimit) +
+                                            _selectedCard.DailyPaymentLimit + " " + _cardCurrencyIso);
+                    await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_InputPurchaseLimit));
+                    context.Wait(ResumeAfterLimitChangedAsync);
                     break;
-                case Options.ClientAndCardSelected:
-                    context.Done<CardLimitModificationResult>(null);//todo: ide nem ez kell majd
+                case CardLimitType.CashWithdrawalLimit:
+                    await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_OldWithdrawalLimit) +
+                                            _selectedCard.DailyCashWithdrawalLimit + " " + _cardCurrencyIso);
+                    await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_InputWithdrawalLimit));
+                    context.Wait(ResumeAfterLimitChangedAsync);
                     break;
-                case Options.ClientAndLimitTypeSelected:
-                    context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
+                case CardLimitType.All:
+                    context.Done<CardLimitModificationResult>(null);//todo: törölni
                     break;
                 default:
-                    context.Done<CardLimitModificationResult>(null);
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
-            //await context.PostAsync("Set card limit dialog");
         }
 
-        private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
+        private async Task ResumeAfterLimitChangedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            _selectedCardId = await result;
-            await context.PostAsync($"cardid : {_selectedCardId}");
-            CreateLimitTypeChoice(context);
-        }
+            string newLimitAsString = (await result).Text;
+            int newLimit;
+            if (!int.TryParse(newLimitAsString, out newLimit))
+            {
+                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_InvalidAmount));
+                context.Wait(ResumeAfterLimitChangedAsync);
+            }
+            else
+            {
+                DAL.UpdateCardLimit(_cardId, _limitType, newLimit);
 
-        private void CreateLimitTypeChoice(IDialogContext context)
-        {
-            PromptDialog.Choice(context, ResumeAfterLimitTypeChoiceAsync,
-                new[] { CardLimitType.PurchaseLimit, CardLimitType.CashWithdrawalLimit, CardLimitType.All },
-                TextProvider.Provide(TextCategory.SETCARDLIMIT_PleaseSelectLimitType),
-                TextProvider.Provide(TextCategory.COMMON_NotValidOption),
-                descriptions: new[]
+                switch (_limitType)
                 {
-                    TextProvider.Provide(TextCategory.SETCARDLIMIT_PurchaseLimitDesc),
-                    TextProvider.Provide(TextCategory.SETCARDLIMIT_WithDrawalLimitDesc),
-                    TextProvider.Provide(TextCategory.SETCARDLIMIT_BothLimitTypeDesc)
-                });
-        }
-
-        private async Task ResumeAfterLimitTypeChoiceAsync(IDialogContext context, IAwaitable<CardLimitType> result)
-        {
-            CardLimitType limitType = await result;
-            context.Done<CardLimitModificationResult>(null);
-        }
-
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            context.Done<CardLimitModificationResult>(null);//todo: ne maradjon így
+                    case CardLimitType.PurchaseLimit:
+                        await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_PurchaseLimitChanged) +
+                                                newLimit + " " + _cardCurrencyIso);
+                        break;
+                    case CardLimitType.CashWithdrawalLimit:
+                        await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_WithdrawalLimitChanged) +
+                                                newLimit + " " + _cardCurrencyIso);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                context.Done<CardLimitModificationResult>(null);
+            }
         }
     }
 }

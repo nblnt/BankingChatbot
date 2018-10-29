@@ -2,7 +2,6 @@
 using BotService.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Scorables;
-using Microsoft.Bot.Builder.Scorables.Internals;
 using Microsoft.Bot.Connector;
 
 namespace BotService

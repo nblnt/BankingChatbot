@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using BankingChatbot.Commons.Enum;
-using BankingChatbot.Commons.Util;
 using BankingChatbot.TextStorage;
 using BotService.Properties;
 using Microsoft.Bot.Builder.Dialogs;
@@ -62,7 +60,7 @@ namespace BotService.Dialogs
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 Activity message = new Activity(text: result.Query);
-                context.Call(new SetCardLimitDialog(1) /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitDialogAsync);
+                context.Call(new SetCardLimitInitializationDialog(1) /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitInitializationDialogAsync);
             }
             else
             {

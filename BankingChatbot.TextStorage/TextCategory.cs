@@ -20,7 +20,7 @@
 
         GETCARDLIMIT_MoreThanOneCard,
         GETCARDLIMIT_ZeroCard,
-        GETCARDLIMIT_WithDrawalLimit,
+        GETCARDLIMIT_WithdrawalLimit,
         GETCARDLIMIT_PurchaseLimit,
 
         SELECTCARD_PleaseSelect,
@@ -32,6 +32,13 @@
         SETCARDLIMIT_PleaseSelectLimitType,
         SETCARDLIMIT_PurchaseLimitDesc,
         SETCARDLIMIT_WithDrawalLimitDesc,
-        SETCARDLIMIT_BothLimitTypeDesc
+        SETCARDLIMIT_BothLimitTypeDesc,
+        SETCARDLIMIT_InvalidAmount,
+        SETCARDLIMIT_InputPurchaseLimit,
+        SETCARDLIMIT_InputWithdrawalLimit,
+        SETCARDLIMIT_PurchaseLimitChanged,
+        SETCARDLIMIT_WithdrawalLimitChanged,
+        SETCARDLIMIT_OldPurchaseLimit,
+        SETCARDLIMIT_OldWithdrawalLimit
     }
 }
