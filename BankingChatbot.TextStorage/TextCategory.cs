@@ -39,6 +39,8 @@
         SETCARDLIMIT_PurchaseLimitChanged,
         SETCARDLIMIT_WithdrawalLimitChanged,
         SETCARDLIMIT_OldPurchaseLimit,
-        SETCARDLIMIT_OldWithdrawalLimit
+        SETCARDLIMIT_OldWithdrawalLimit,
+        SETCARDLIMIT_Success,
+        SETCARDLIMIT_Error
     }
 }

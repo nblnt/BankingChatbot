@@ -202,6 +202,18 @@
       "texts": [
         "The card's current daily withdrawal limit is "
       ]
+    },
+    {
+      "category": "SETCARDLIMIT_Success",
+      "texts": [
+        "Your card limit modification was successful!"
+      ]
+    },
+    {
+      "category": "SETCARDLIMIT_Error",
+      "texts": [
+        "Sorry! An error occured on card limit modification. Please try again later, or call our Customer Service!"
+      ]
     }
   ]
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
 using BankingChatbot.Commons.Util;
@@ -11,7 +12,7 @@ using Microsoft.Bot.Connector;
 namespace BotService.Dialogs
 {
     [Serializable]
-    public class SetCardLimitInitializationDialog : DialogBase<CardLimitModificationResult>
+    public class SetCardLimitInitializationDialog : DialogBase<bool>
     {
         private enum Options
         {
@@ -62,17 +63,18 @@ namespace BotService.Dialogs
                     }
                     else
                     {
-                        context.Done<CardLimitModificationResult>(null);//todo: ide nem ez kell majd
+                        _selectedCardId = _userDebitCards.Select(x => x.DebitCardId).Single();
+                        CreateLimitTypeChoice(context);
                     }
                     break;
                 case Options.ClientAndCardSelected:
-                    context.Done<CardLimitModificationResult>(null);//todo: ide nem ez kell majd
+                    CreateLimitTypeChoice(context);
                     break;
                 case Options.ClientAndLimitTypeSelected:
                     context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
                     break;
                 default:
-                    context.Done<CardLimitModificationResult>(null);
+                    context.Done(false);
                     break;
             }
         }
@@ -86,7 +88,7 @@ namespace BotService.Dialogs
         private void CreateLimitTypeChoice(IDialogContext context)
         {
             PromptDialog.Choice(context, ResumeAfterLimitTypeChoiceAsync,
-                new[] { CardLimitType.PurchaseLimit, CardLimitType.CashWithdrawalLimit, CardLimitType.All },
+                new[] { CardLimitType.PurchaseLimit, CardLimitType.CashWithdrawalLimit, CardLimitType.Both },
                 TextProvider.Provide(TextCategory.SETCARDLIMIT_PleaseSelectLimitType),
                 TextProvider.Provide(TextCategory.COMMON_NotValidOption),
                 descriptions: new[]
@@ -99,21 +101,49 @@ namespace BotService.Dialogs
 
         private async Task ResumeAfterLimitTypeChoiceAsync(IDialogContext context, IAwaitable<CardLimitType> result)
         {
-            CardLimitType limitType = await result;
-            context.Call(
-                new SetCardLimitDialog(
-                    _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
-                    limitType), ResumeAfterSetCardLimitDialogAsync);
+            _cardLimitType = await result;
+            if (_cardLimitType == CardLimitType.Both || _cardLimitType == CardLimitType.PurchaseLimit )
+            {
+                context.Call(
+                    new SetCardLimitDialog(
+                        _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
+                        CardLimitType.PurchaseLimit), ResumeAfterSetCardLimitDialogAsync);
+            }
+            else
+            {
+                context.Call(
+                    new SetCardLimitDialog(
+                        _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
+                        CardLimitType.CashWithdrawalLimit), ResumeAfterSetCardLimitDialogAsync);
+            }
         }
 
         private async Task ResumeAfterSetCardLimitDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
         {
-            context.Done<CardLimitModificationResult>(null);//todo: ne maradjon így
+            CardLimitModificationResult modificationResult = await result;
+            if (_cardLimitType == CardLimitType.Both)
+            {
+                context.Call(new SetCardLimitDialog(
+                    _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
+                    CardLimitType.CashWithdrawalLimit), ResumeAfterSetBothCardLimitDialogAsync);
+            }
+            else
+            {
+                context.Done(true);
+            }
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task ResumeAfterSetBothCardLimitDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
         {
-            context.Done<CardLimitModificationResult>(null);//todo: ne maradjon így
+            CardLimitModificationResult modificationResult = await result;
+            if (modificationResult.WithDrawalLimitChanged != null && (bool) modificationResult.WithDrawalLimitChanged)
+            {
+                context.Done(true);
+            }
+            else
+            {
+                context.Done(false);
+            }
         }
     }
 }

@@ -28,7 +28,10 @@ namespace BotService.Dialogs
                 bool changeSettings = await result;
                 if (changeSettings)
                 {
-                    context.Call(new SetCardLimitInitializationDialog(1)/*todo:ide majd kellhet egy speckó visszatérési típus*/, ResumeAfterSetCardLimitInitializationDialogAsync);
+                    context.Call(
+                        new SetCardLimitInitializationDialog(1,
+                            context.PrivateConversationData.GetValue<int>("selectedCardId")),
+                        ResumeAfterSetCardLimitInitializationDialogAsync);
                 }
                 else
                 {
@@ -41,9 +44,19 @@ namespace BotService.Dialogs
             }
         }
 
-        private async Task ResumeAfterSetCardLimitInitializationDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
+        private async Task ResumeAfterSetCardLimitInitializationDialogAsync(IDialogContext context, IAwaitable<bool> result)
         {
-            CardLimitModificationResult modificationData = await result;
+            bool success = await result;
+            if (success)
+            {
+                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_Success));
+            }
+            else
+            {
+                await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_Error));
+            }
+
+            context.PrivateConversationData.RemoveValue("selectedCardId");
         }
 
         private async Task AskForAccurateInput(IDialogContext context)

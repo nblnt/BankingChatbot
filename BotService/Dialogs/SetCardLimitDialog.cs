@@ -44,9 +44,6 @@ namespace BotService.Dialogs
                     await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_InputWithdrawalLimit));
                     context.Wait(ResumeAfterLimitChangedAsync);
                     break;
-                case CardLimitType.All:
-                    context.Done<CardLimitModificationResult>(null);//todo: törölni
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -65,21 +62,33 @@ namespace BotService.Dialogs
             {
                 DAL.UpdateCardLimit(_cardId, _limitType, newLimit);
 
+                CardLimitModificationResult modificationResult;
                 switch (_limitType)
                 {
                     case CardLimitType.PurchaseLimit:
+                        modificationResult = new CardLimitModificationResult()
+                        {
+                            PurchaseLimitChanged = true,
+                            PurchaseLimit = newLimit
+                        };
                         await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_PurchaseLimitChanged) +
                                                 newLimit + " " + _cardCurrencyIso);
                         break;
                     case CardLimitType.CashWithdrawalLimit:
+                        modificationResult = new CardLimitModificationResult()
+                        {
+                            WithDrawalLimitChanged = true,
+                            WithDrawalLimit = newLimit
+                        };
                         await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_WithdrawalLimitChanged) +
                                                 newLimit + " " + _cardCurrencyIso);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                
-                context.Done<CardLimitModificationResult>(null);
+
+
+                context.Done(modificationResult);
             }
         }
     }

@@ -50,9 +50,11 @@ namespace BotService.Dialogs
         private async Task CardIdReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             IMessageActivity cardIdAsString = await result; 
-            if (int.TryParse(cardIdAsString.Text, out int cardID))
+            if (int.TryParse(cardIdAsString.Text, out int cardId))
             {
-                context.Done(cardID);
+                //betöltjük a kiválasztott kártyát a conversationdata-ba
+                context.PrivateConversationData.SetValue("selectedCardId", cardId);
+                context.Done(cardId);
             }
             else
             {

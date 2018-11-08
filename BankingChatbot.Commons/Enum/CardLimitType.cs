@@ -7,6 +7,6 @@ namespace BankingChatbot.Commons.Enum
     {
         PurchaseLimit = 0,
         CashWithdrawalLimit = 1,
-        All = 3
+        Both = 3
     }
 }

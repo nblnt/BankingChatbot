@@ -67,7 +67,7 @@ namespace BotService.Dialogs
 
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
         {
-            int cardId = await result;
+            int cardId = await result;            
             await PostLimitInformationAsync(context, cardId);
             context.Done<object>(null);
         }
