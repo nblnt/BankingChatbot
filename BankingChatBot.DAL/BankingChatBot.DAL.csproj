@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityFramework\DAL.cs" />
+    <Compile Include="DAL.cs" />
     <Compile Include="EntityFramework\Model\Account.cs" />
     <Compile Include="EntityFramework\BankingChatbotDataContext.cs" />
     <Compile Include="EntityFramework\Model\Branch.cs" />
@@ -73,5 +73,6 @@
       <Name>BankingChatbot.Commons</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

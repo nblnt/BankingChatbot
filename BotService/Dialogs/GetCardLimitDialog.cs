@@ -35,11 +35,10 @@ namespace BotService.Dialogs
             switch (_clientDebitCards.Count)
             {
                 case 1:
-                {
                     int cardId = _clientDebitCards.Single().DebitCardId;
                     await PostLimitInformationAsync(context, cardId);
+                    context.Done<object>(null);
                     break;
-                }
                 case 0:
                     await context.PostAsync(TextProvider.Provide(TextCategory.GETCARDLIMIT_ZeroCard));
                     context.Done<object>(null);
@@ -67,7 +66,7 @@ namespace BotService.Dialogs
 
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
         {
-            int cardId = await result;            
+            int cardId = await result;
             await PostLimitInformationAsync(context, cardId);
             context.Done<object>(null);
         }

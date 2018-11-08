@@ -24,7 +24,7 @@ namespace BankingChatBot.DAL.EntityFramework
             using (BankingChatbotDataContext db = new BankingChatbotDataContext())
             {
                 return db.DebitCards
-                    .Where(x => x.Account.ClientId == clientId)
+                    .Where(x => x.ClientId == clientId)
                     .Include(x => x.Account)
                     .Include(x => x.DebitCardType)
                     .ToList();

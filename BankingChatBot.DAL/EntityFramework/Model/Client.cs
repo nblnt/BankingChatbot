@@ -11,6 +11,7 @@ namespace BankingChatBot.DAL.EntityFramework.Model
         public Client()
         {
             Accounts = new HashSet<Account>();
+            DebitCards = new HashSet<DebitCard>();
         }
 
         public int ClientId { get; set; }
@@ -28,5 +29,8 @@ namespace BankingChatBot.DAL.EntityFramework.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DebitCard> DebitCards { get; set; }
     }
 }
