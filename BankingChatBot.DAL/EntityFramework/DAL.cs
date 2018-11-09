@@ -62,5 +62,21 @@ namespace BankingChatBot.DAL.EntityFramework
                     .Single();
             }
         }
+
+        public List<Branch> GetBranches()
+        {
+            using (BankingChatbotDataContext db = new BankingChatbotDataContext())
+            {
+                return db.Branches.ToList();
+            }
+        }
+
+        public Branch GetBranch(int branchId)
+        {
+            using (BankingChatbotDataContext db = new BankingChatbotDataContext())
+            {
+                return db.Branches.Single(x => x.BranchId == branchId);
+            }
+        }
     }
 }

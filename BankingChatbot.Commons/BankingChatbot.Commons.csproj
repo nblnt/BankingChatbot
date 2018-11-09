@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\BookTerm.cs" />
     <Compile Include="Enum\CardLimitType.cs" />
+    <Compile Include="Enum\AppointmentCaseOptions.cs" />
+    <Compile Include="Enum\WorkDays.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CardLimitModificationResult.cs" />
   </ItemGroup>

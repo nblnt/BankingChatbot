@@ -13,5 +13,9 @@ namespace BankingChatBot.DAL
         void UpdateCardLimit(int cardId, CardLimitType limitType, int newLimit);
 
         string GetIsoCurrency(int cardId);
+
+        List<Branch> GetBranches();
+
+        Branch GetBranch(int branchId);
     }
 }

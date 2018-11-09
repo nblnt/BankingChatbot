@@ -59,9 +59,26 @@ namespace BotService.Dialogs
             else
             {
                 await context.PostAsync(TextProvider.Provide(TextCategory.SELECTCARD_InvalidCardIdentifier));
-                context.Done(-1); 
+                await context.PostAsync(TextProvider.Provide(TextCategory.SELECTCARD_PleaseSelect));
+                context.Wait(RetryAsync);
             }
         }
 
+        private async Task RetryAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            IMessageActivity cardIdAsString = await result;
+            if (int.TryParse(cardIdAsString.Text, out int cardId))
+            {
+                //betöltjük a kiválasztott kártyát a conversationdata-ba
+                context.PrivateConversationData.SetValue("selectedCardId", cardId);
+                context.Done(cardId);
+            }
+            else
+            {
+                await context.PostAsync(TextProvider.Provide(TextCategory.SELECTCARD_InvalidCardIdentifier));
+                await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_TooManyAttempt));
+                context.Reset();
+            }
+        }
     }
 }

@@ -175,9 +175,12 @@
     <Compile Include="Dialogs\IntentDialog.cs" />
     <Compile Include="Dialogs\IntentDialog.Results.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\SearchBranchDialog.cs" />
+    <Compile Include="Dialogs\SelectBranchDialog.cs" />
     <Compile Include="Dialogs\SelectCardDialog.cs" />
     <Compile Include="Dialogs\SetCardLimitDialog.cs" />
     <Compile Include="Dialogs\SetCardLimitInitializationDialog.cs" />
+    <Compile Include="Forms\BranchAppointment.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

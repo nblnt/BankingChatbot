@@ -60,7 +60,7 @@ namespace BotService.Controllers
                                 await client.Conversations.ReplyToActivityAsync(reply);
                             }
                         }
-                        
+
                     }
                 }
             }

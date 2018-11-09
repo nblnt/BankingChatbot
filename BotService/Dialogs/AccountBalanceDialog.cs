@@ -26,7 +26,7 @@ namespace BotService.Dialogs
         {
             using (BankingChatbotDataContext dbContext = new BankingChatbotDataContext())
             {
-                userAccounts = dbContext.Accounts.Where(x => x.ClientId == 1).ToList();
+                userAccounts = dbContext.Accounts.Where(x => x.ClientId == 1).ToList(); //todo: statikus userid-t töröld
             }
 
             if (userAccounts.Count > 1)

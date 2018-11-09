@@ -53,6 +53,12 @@
       ]
     },
     {
+      "category": "COMMON_TooManyAttempt",
+      "texts": [
+        "You've had too many invalid attempts! I've reset the conversation!"
+      ]
+    },
+    {
       "category": "INTERRUPTION_Help",
       "texts": [
         "This is your help message!"
@@ -86,7 +92,7 @@
     {
       "category": "SELECTCARD_PleaseSelect",
       "texts": [
-        "Please select a card below!"
+        "Please select a card!"
       ]
     },
     {
@@ -213,6 +219,36 @@
       "category": "SETCARDLIMIT_Error",
       "texts": [
         "Sorry! An error occured on card limit modification. Please try again later, or call our Customer Service!"
+      ]
+    },
+    {
+      "category": "SELECTBRANCH_PleaseSelect",
+      "texts": [
+        "Please select branch!"
+      ]
+    },
+    {
+      "category": "SELECTBRANCH_InvalidBranchIdentifier",
+      "texts": [
+        "Invalid branch! Try again"
+      ]
+    },
+    {
+      "category": "SELECTBRANCH_SelectedBranch",
+      "texts": [
+        "Your selected branch: "
+      ]
+    },
+    {
+      "category": "BRANCHAPPOINTMENT_WishToBook",
+      "texts": [
+        "Do you wish to book an appointment to this branch?"
+      ]
+    },
+    {
+      "category": "BRANCHAPPOINTMENT_Welcome",
+      "texts": [
+        "Here is the appointment booking! Please follow the instructions!"
       ]
     }
   ]

@@ -7,6 +7,7 @@
         COMMON_NotUnderstandable,
         COMMON_AskingMoreAccurateInput,
         COMMON_HelpMore,
+        COMMON_TooManyAttempt,
 
         INTERRUPTION_Help,
         INTERRUPTION_Cancel,   
@@ -41,6 +42,14 @@
         SETCARDLIMIT_OldPurchaseLimit,
         SETCARDLIMIT_OldWithdrawalLimit,
         SETCARDLIMIT_Success,
-        SETCARDLIMIT_Error
+        SETCARDLIMIT_Error,
+
+        SELECTBRANCH_PleaseSelect,
+        SELECTBRANCH_InvalidBranchIdentifier,
+        SELECTBRANCH_SelectedBranch,
+
+        BRANCHAPPOINTMENT_WishToBook,
+        BRANCHAPPOINTMENT_Welcome,
+
     }
 }

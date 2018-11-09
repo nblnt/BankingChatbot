@@ -59,8 +59,20 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                Activity message = new Activity(text: result.Query);
                 context.Call(new SetCardLimitInitializationDialog(1) /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitInitializationDialogAsync);
+            }
+            else
+            {
+                await AskForAccurateInput(context);
+            }
+        }
+
+        [LuisIntent("SearchBranch")]
+        public async Task SearchBranchAsync(IDialogContext context, LuisResult result)
+        {
+            if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
+            {
+                context.Call(new SearchBranchDialog()  /*todo: statikus userid-t majd töröld*/, ResumeAfterSearchBranchDialogAsync);
             }
             else
             {

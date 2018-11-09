@@ -12,7 +12,6 @@ namespace BotService
         {
             base.Load(builder);
 
-            //bug: cancelscorable-nél nem jön vissza üzenet, a rest viszont megtörténik
             builder
                 .Register(c => new CancelScorable(c.Resolve<IDialogTask>()))
                 .As<IScorable<IActivity, double>>()
