@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using BankingChatbot.Commons.Util;
 using BankingChatbot.TextStorage;
+using BankingChatBot.DAL.EntityFramework;
 using BotService.Forms;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
@@ -77,7 +79,7 @@ namespace BotService.Dialogs
                 bool appoint = await result;
                 if (appoint)
                 {
-                    await context.Forward(FormDialog.FromForm(BranchAppointment.BuildForm),
+                    await context.Forward(FormDialog.FromForm(BranchAppointmentForm.BuildForm),
                         ResumeAfterBranchAppointmentForm, Activity.CreateMessageActivity());
                 }
                 else
@@ -91,9 +93,31 @@ namespace BotService.Dialogs
             }
         }
 
-        private async Task ResumeAfterBranchAppointmentForm(IDialogContext context, IAwaitable<BranchAppointment> result)
+        private async Task ResumeAfterBranchAppointmentForm(IDialogContext context, IAwaitable<BranchAppointmentForm> result)
         {
-            BranchAppointment appointment = await result;
+            BranchAppointmentForm appointment = await result;
+            if (appointment != null)
+            {
+                if (context.PrivateConversationData.TryGetValue("branchId", out int branchId))
+                {
+                    DAL dal = new DAL();
+                    //A vasárnapot átalakítjuk hetedik napra
+                    int currentDayOfWeek = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;
+                    int remainsFromWeek = 7 - currentDayOfWeek;
+                    int selectedWorkDay = (int)appointment.Days + 1;
+                    DateTime bookingDate = DateTime.Now
+                        .AddDays(selectedWorkDay + 7 * (int)appointment.Term + remainsFromWeek).Date.AddHours((int)appointment.Hour);
+                    dal.InsertAppointmentBooking(branchId, _clientId, (int)appointment.Case, bookingDate);
+
+                    await context.PostAsync(TextProvider.Provide(TextCategory.BRANCHAPPOINTMENT_BookingSaved));
+                }
+            }
+        }
+
+        private async Task ResumeAfterSearchBranchDialogForBookingAsync(IDialogContext context, IAwaitable<object> result)
+        {
+            await context.Forward(FormDialog.FromForm(BranchAppointmentForm.BuildForm),
+                ResumeAfterBranchAppointmentForm, Activity.CreateMessageActivity());
         }
 
         private async Task AskForAccurateInput(IDialogContext context)

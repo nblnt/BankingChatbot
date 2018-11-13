@@ -1,12 +1,10 @@
+using System;
+using System.Data.Entity;
 using BankingChatBot.DAL.EntityFramework.Model;
 
 namespace BankingChatBot.DAL.EntityFramework
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
+    [Serializable]
     public partial class BankingChatbotDataContext : DbContext
     {
         public BankingChatbotDataContext()
@@ -15,6 +13,7 @@ namespace BankingChatBot.DAL.EntityFramework
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<BookedAppointment> BookedAppointments { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<ClientContact> ClientContacts { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
@@ -22,6 +21,7 @@ namespace BankingChatBot.DAL.EntityFramework
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<DebitCard> DebitCards { get; set; }
         public virtual DbSet<DebitCardType> DebitCardTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +35,11 @@ namespace BankingChatBot.DAL.EntityFramework
 
             modelBuilder.Entity<Client>()
                 .HasMany(e => e.Accounts)
+                .WithRequired(e => e.Client)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Client>()
+                .HasMany(e => e.Users)
                 .WithRequired(e => e.Client)
                 .WillCascadeOnDelete(false);
 
@@ -59,6 +64,14 @@ namespace BankingChatBot.DAL.EntityFramework
                 .HasMany(e => e.DebitCards)
                 .WithRequired(e => e.DebitCardType)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Password)
+                .IsUnicode(false);
         }
     }
 }

@@ -58,5 +58,14 @@ namespace BotService.Properties {
                 return ((bool)(this["UseEntityFramework"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int MockClientId {
+            get {
+                return ((int)(this["MockClientId"]));
+            }
+        }
     }
 }

@@ -11,7 +11,9 @@ namespace BankingChatBot.DAL.EntityFramework.Model
         public Client()
         {
             Accounts = new HashSet<Account>();
+            BookedAppointments = new HashSet<BookedAppointment>();
             DebitCards = new HashSet<DebitCard>();
+            Users = new HashSet<User>();
         }
 
         public int ClientId { get; set; }
@@ -31,6 +33,12 @@ namespace BankingChatBot.DAL.EntityFramework.Model
         public virtual ICollection<Account> Accounts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookedAppointment> BookedAppointments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DebitCard> DebitCards { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

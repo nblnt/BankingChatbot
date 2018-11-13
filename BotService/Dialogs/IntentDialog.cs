@@ -13,6 +13,8 @@ namespace BotService.Dialogs
     [LuisModel("86814b35-602d-4b50-91c1-280144f8e9b5", "5754ccecd67d462a95192fbce4209492")]
     public partial class IntentDialog : LuisDialog<object>
     {
+        private int _clientId = Properties.Settings.Default.MockClientId;
+
         [LuisIntent("Greeting")]
         public async Task GreetAsync(IDialogContext context, LuisResult result)
         {            
@@ -32,7 +34,7 @@ namespace BotService.Dialogs
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 Activity message = new Activity(text: result.Query);
-                await context.Forward(new AccountBalanceDialog(), ResumeAfterChildDialogAsync, message);
+                await context.Forward(new AccountBalanceDialog(_clientId), ResumeAfterChildDialogAsync, message);
             }
             else
             {
@@ -46,7 +48,7 @@ namespace BotService.Dialogs
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 Activity message = new Activity(text: result.Query);
-                await context.Forward(new GetCardLimitDialog(1)/*todo: statikus userid-t majd töröld*/, ResumeAfterGetCardLimitDialogAsync, message);
+                await context.Forward(new GetCardLimitDialog(_clientId), ResumeAfterGetCardLimitDialogAsync, message);
             }
             else
             {
@@ -59,7 +61,7 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                context.Call(new SetCardLimitInitializationDialog(1) /*todo: statikus userid-t majd töröld*/, ResumeAfterSetCardLimitInitializationDialogAsync);
+                context.Call(new SetCardLimitInitializationDialog(_clientId), ResumeAfterSetCardLimitInitializationDialogAsync);
             }
             else
             {
@@ -72,7 +74,20 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                context.Call(new SearchBranchDialog()  /*todo: statikus userid-t majd töröld*/, ResumeAfterSearchBranchDialogAsync);
+                context.Call(new SearchBranchDialog(), ResumeAfterSearchBranchDialogAsync);
+            }
+            else
+            {
+                await AskForAccurateInput(context);
+            }
+        }
+
+        [LuisIntent("BookBranchAppointment")]
+        public async Task BookBranchAppointmentAsync(IDialogContext context, LuisResult result)
+        {
+            if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
+            {
+                context.Call(new SearchBranchDialog(), ResumeAfterSearchBranchDialogForBookingAsync);
             }
             else
             {

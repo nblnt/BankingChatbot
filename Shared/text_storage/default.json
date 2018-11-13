@@ -250,6 +250,12 @@
       "texts": [
         "Here is the appointment booking! Please follow the instructions!"
       ]
+    },
+    {
+      "category": "BRANCHAPPOINTMENT_BookingSaved",
+      "texts": [
+        "Your booking has succesfully saved!"
+      ]
     }
   ]
 }

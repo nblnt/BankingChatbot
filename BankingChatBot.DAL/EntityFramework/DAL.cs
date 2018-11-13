@@ -78,5 +78,21 @@ namespace BankingChatBot.DAL.EntityFramework
                 return db.Branches.Single(x => x.BranchId == branchId);
             }
         }
+
+        public void InsertAppointmentBooking(int branchId, int clientId, int caseType, DateTime dateTime)
+        {
+            using (BankingChatbotDataContext db = new BankingChatbotDataContext())
+            {
+                BookedAppointment appointment = new BookedAppointment()
+                {
+                    BranchId =  branchId,
+                    CaseType = caseType,
+                    ClientId = clientId,
+                    Date = dateTime
+                };
+                db.BookedAppointments.Add(appointment);
+                db.SaveChanges();
+            }
+        }
     }
 }

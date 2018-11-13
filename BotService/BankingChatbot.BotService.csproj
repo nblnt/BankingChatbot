@@ -170,7 +170,6 @@
     <Compile Include="Dialogs\CancelScorable.cs" />
     <Compile Include="Dialogs\DialogBase.cs" />
     <Compile Include="Dialogs\GetCardLimitDialog.cs" />
-    <Compile Include="Dialogs\GreetingDialog.cs" />
     <Compile Include="Dialogs\HelpScorable.cs" />
     <Compile Include="Dialogs\IntentDialog.cs" />
     <Compile Include="Dialogs\IntentDialog.Results.cs" />
@@ -180,7 +179,7 @@
     <Compile Include="Dialogs\SelectCardDialog.cs" />
     <Compile Include="Dialogs\SetCardLimitDialog.cs" />
     <Compile Include="Dialogs\SetCardLimitInitializationDialog.cs" />
-    <Compile Include="Forms\BranchAppointment.cs" />
+    <Compile Include="Forms\BranchAppointmentForm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

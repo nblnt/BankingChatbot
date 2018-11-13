@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BankingChatbot.Commons.Enum;
 using BankingChatBot.DAL.EntityFramework.Model;
 
@@ -17,5 +18,7 @@ namespace BankingChatBot.DAL
         List<Branch> GetBranches();
 
         Branch GetBranch(int branchId);
+
+        void InsertAppointmentBooking(int branchId, int clientId, int caseType, DateTime dateTime);
     }
 }

@@ -13,9 +13,16 @@ namespace BotService.Dialogs
     [Serializable]
     public class AccountBalanceDialog : DialogBase<object>
     {
+        private int _clientId;
+
         private List<Account> userAccounts;
 
         private Account selectedAccount;
+
+        public AccountBalanceDialog(int clientId)
+        {
+            _clientId = clientId;
+        }
 
         public override async Task StartAsync(IDialogContext context)
         {
@@ -26,7 +33,7 @@ namespace BotService.Dialogs
         {
             using (BankingChatbotDataContext dbContext = new BankingChatbotDataContext())
             {
-                userAccounts = dbContext.Accounts.Where(x => x.ClientId == 1).ToList(); //todo: statikus userid-t töröld
+                userAccounts = dbContext.Accounts.Where(x => x.ClientId == _clientId).ToList();
             }
 
             if (userAccounts.Count > 1)

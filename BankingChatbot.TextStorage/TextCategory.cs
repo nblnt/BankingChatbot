@@ -50,6 +50,6 @@
 
         BRANCHAPPOINTMENT_WishToBook,
         BRANCHAPPOINTMENT_Welcome,
-
+        BRANCHAPPOINTMENT_BookingSaved
     }
 }
