@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using BankingChatbot.TextStorage.Properties;
 using Newtonsoft.Json;
 
 namespace BankingChatbot.TextStorage
 {
     public class TextStorageLoader
     {
-        private const string FilePath = @"C:\Users\Balint\Source\Repos\BotService\Shared\text_storage\default.json";
+        private string _filePath;
 
         private string _textFile;
 
@@ -13,10 +14,12 @@ namespace BankingChatbot.TextStorage
 
         public TextStorageLoader()
         {
-            using (StreamReader streamReader = new StreamReader(FilePath))
+            using (StreamReader streamReader = new StreamReader(_filePath))
             {
+                _filePath = Settings.Default.TextStoragePath;
                 _textFile = streamReader.ReadToEnd();
-                Storage = JsonConvert.DeserializeObject<TextStorage>(_textFile);
+                Storage = JsonConvert
+                    .DeserializeObject<TextStorage>(_textFile);
             }
         }
     }

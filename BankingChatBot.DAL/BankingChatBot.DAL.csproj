@@ -58,9 +58,9 @@
     <Compile Include="EntityFramework\Model\ClientContact.cs" />
     <Compile Include="EntityFramework\Model\ContactType.cs" />
     <Compile Include="EntityFramework\Model\Currency.cs" />
+    <Compile Include="EntityFramework\DAL.cs" />
     <Compile Include="EntityFramework\Model\DebitCard.cs" />
     <Compile Include="EntityFramework\Model\DebitCardType.cs" />
-    <Compile Include="EntityFramework\DAL.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityFramework\Model\User.cs" />

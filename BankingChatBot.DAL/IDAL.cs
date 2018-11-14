@@ -7,6 +7,8 @@ namespace BankingChatBot.DAL
 {
     public interface IDAL
     {
+        List<Account> GetClientAccounts(int clientId);
+
         DebitCard GetDebitCard(int cardId);
 
         List<DebitCard> GetClientDebitCards(int clientId);

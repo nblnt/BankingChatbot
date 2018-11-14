@@ -44,8 +44,9 @@ namespace BankingChatBot.DAL.EntityFramework
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ContactType>()
-                .HasOptional(e => e.ClientContact)
-                .WithRequired(e => e.ContactType);
+                .HasMany(e => e.ClientContacts)
+                .WithRequired(e => e.ContactType)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Currency>()
                 .Property(e => e.ISO)

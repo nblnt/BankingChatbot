@@ -15,9 +15,9 @@ namespace BotService.Dialogs
     {
         private int _clientId;
 
-        private List<Account> userAccounts;
+        private List<Account> _clientAccounts;
 
-        private Account selectedAccount;
+        private Account _selectedAccount;
 
         public AccountBalanceDialog(int clientId)
         {
@@ -31,19 +31,16 @@ namespace BotService.Dialogs
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            using (BankingChatbotDataContext dbContext = new BankingChatbotDataContext())
-            {
-                userAccounts = dbContext.Accounts.Where(x => x.ClientId == _clientId).ToList();
-            }
+            _clientAccounts = DAL.GetClientAccounts(_clientId);
 
-            if (userAccounts.Count > 1)
+            if (_clientAccounts.Count > 1)
             {
                 ShowUserAccountsOptions(context);                
             }
-            else if (userAccounts.Count == 1)
+            else if (_clientAccounts.Count == 1)
             {
-                selectedAccount = userAccounts.Single();
-                await WriteOutBalanceAsync(context, selectedAccount);
+                _selectedAccount = _clientAccounts.Single();
+                await WriteOutBalanceAsync(context, _selectedAccount);
                 context.Done(true);
             }
             else
@@ -55,7 +52,7 @@ namespace BotService.Dialogs
 
         private void ShowUserAccountsOptions(IDialogContext context)
         {
-            PromptDialog.Choice(context, OnOptionSelectedAsync, userAccounts.Select(x => x.AccountNumber).ToList(),
+            PromptDialog.Choice(context, OnOptionSelectedAsync, _clientAccounts.Select(x => x.AccountNumber).ToList(),
                 TextProvider.Provide(TextCategory.ACCOUNTBALANCE_MoreThanOneAccount),
                 TextProvider.Provide(TextCategory.COMMON_NotValidOption));
         }
@@ -63,7 +60,7 @@ namespace BotService.Dialogs
         private async Task OnOptionSelectedAsync(IDialogContext context, IAwaitable<string> result)
         {
             string selectedAccountNumber = await result;
-            Account selectedAccount = userAccounts.Single(x => x.AccountNumber == selectedAccountNumber);
+            Account selectedAccount = _clientAccounts.Single(x => x.AccountNumber == selectedAccountNumber);
             await WriteOutBalanceAsync(context, selectedAccount);
             context.Done(true);
         }
@@ -72,8 +69,6 @@ namespace BotService.Dialogs
         {
             await context.PostAsync(TextProvider.Provide(TextCategory.ACCOUNTBALANCE_BalanceIs) +
                                     $"{account.Balance} {account.Currency}");
-        }
-
-        
+        }        
     }
 }

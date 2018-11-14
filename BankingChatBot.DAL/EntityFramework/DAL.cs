@@ -10,14 +10,26 @@ namespace BankingChatBot.DAL.EntityFramework
     [Serializable]
     public class DAL : IDAL
     {
+        public List<Account> GetClientAccounts(int clientId)
+        {
+            using (BankingChatbotDataContext db
+                = new BankingChatbotDataContext())
+            {
+                return db.Accounts
+                    .Where(x => x.ClientId == clientId)
+                    .ToList();
+            }
+        }        
+
         public DebitCard GetDebitCard(int cardId)
         {
-            using (BankingChatbotDataContext db = new BankingChatbotDataContext())
+            using (BankingChatbotDataContext db
+                = new BankingChatbotDataContext())
             {
                 return db.DebitCards
                     .Single(x => x.DebitCardId == cardId);
             }
-        }
+        }        
 
         public List<DebitCard> GetClientDebitCards(int clientId)
         {

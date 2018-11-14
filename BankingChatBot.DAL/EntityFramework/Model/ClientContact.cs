@@ -13,6 +13,8 @@ namespace BankingChatBot.DAL.EntityFramework.Model
 
         public string ContactText { get; set; }
 
+        public virtual Client Client { get; set; }
+
         public virtual ContactType ContactType { get; set; }
     }
 }

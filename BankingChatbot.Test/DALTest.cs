@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BankingChatBot.DAL.EntityFramework;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
