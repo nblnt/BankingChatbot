@@ -52,7 +52,8 @@ namespace BotService.Dialogs
 
         private void ShowUserAccountsOptions(IDialogContext context)
         {
-            PromptDialog.Choice(context, OnOptionSelectedAsync, _clientAccounts.Select(x => x.AccountNumber).ToList(),
+            PromptDialog.Choice(context, OnOptionSelectedAsync, _clientAccounts
+                    .Select(x => x.AccountNumber).ToList(),
                 TextProvider.Provide(TextCategory.ACCOUNTBALANCE_MoreThanOneAccount),
                 TextProvider.Provide(TextCategory.COMMON_NotValidOption));
         }

@@ -11,7 +11,8 @@ namespace BotService.Forms
     [Serializable]
     public class BranchAppointmentForm
     {
-        [Prompt("In what kind of case do you need help? {||}")] //{||} jel az enumok megjelenítésére alkalmas, ha promptot használunk
+        //{||} jel az enumok megjelenítésére alkalmas, ha promptot használunk
+        [Prompt("In what kind of case do you need help? {||}")] 
         public AppointmentCaseOptions? Case;
 
         [Prompt("In which week do you want to attend? {||}")]
@@ -26,9 +27,9 @@ namespace BotService.Forms
 
         public static IForm<BranchAppointmentForm> BuildForm()
         {
-            //Amennyiben testreszabnánk a formot Build előtt, az össze fieldet specifikálni kell
             return new FormBuilder<BranchAppointmentForm>()
-                .Message(TextProvider.Provide(TextCategory.BRANCHAPPOINTMENT_Welcome)) 
+                .Message(TextProvider.Provide(
+                    TextCategory.BRANCHAPPOINTMENT_Welcome)) 
                 .Build();
         }
     }

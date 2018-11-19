@@ -131,6 +131,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.4\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -158,6 +159,9 @@
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="BotService.bot" />
+    <None Include="Resources\mastercard_blue.png" />
+    <None Include="Resources\MasterCardBlue.bmp" />
+    <None Include="Resources\blue-location-icon.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -173,7 +177,6 @@
     <Compile Include="Dialogs\HelpScorable.cs" />
     <Compile Include="Dialogs\IntentDialog.cs" />
     <Compile Include="Dialogs\IntentDialog.Results.cs" />
-    <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\SearchBranchDialog.cs" />
     <Compile Include="Dialogs\SelectBranchDialog.cs" />
     <Compile Include="Dialogs\SelectCardDialog.cs" />

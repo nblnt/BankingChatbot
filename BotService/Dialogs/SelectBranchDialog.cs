@@ -23,7 +23,7 @@ namespace BotService.Dialogs
             foreach (Branch branch in branches)
             {
                 List<CardImage> cardImages = new List<CardImage>();
-                cardImages.Add(new CardImage("https://icla.org/wp-content/uploads/2018/02/blue-location-icon-png-19.png"));
+                cardImages.Add(new CardImage("https://image.ibb.co/fPqt70/blue-location-icon.png"));
 
                 ThumbnailCard thumbnailCard = new ThumbnailCard()
                 {

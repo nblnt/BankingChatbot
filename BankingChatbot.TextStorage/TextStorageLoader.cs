@@ -14,9 +14,9 @@ namespace BankingChatbot.TextStorage
 
         public TextStorageLoader()
         {
+            _filePath = Settings.Default.TextStoragePath;
             using (StreamReader streamReader = new StreamReader(_filePath))
             {
-                _filePath = Settings.Default.TextStoragePath;
                 _textFile = streamReader.ReadToEnd();
                 Storage = JsonConvert
                     .DeserializeObject<TextStorage>(_textFile);

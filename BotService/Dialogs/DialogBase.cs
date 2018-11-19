@@ -13,7 +13,9 @@ namespace BotService.Dialogs
 
         protected DialogBase()
         {
-            DAL = Settings.Default.UseEntityFramework ? new BankingChatBot.DAL.EntityFramework.DAL() : null;
+            DAL = Settings.Default.UseEntityFramework 
+                ? new BankingChatBot.DAL.EntityFramework.DAL() 
+                : null;
         }
 
         public abstract Task StartAsync(IDialogContext context);

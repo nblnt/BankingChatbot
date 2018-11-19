@@ -12,9 +12,10 @@ namespace BotService.Dialogs
 {
     public partial class IntentDialog
     {
-        private async Task ResumeAfterChildDialogAsync(IDialogContext context, IAwaitable<object> result)
+        private async Task ResumeAfterChildDialogAsync(IDialogContext context, 
+            IAwaitable<object> result)
         {
-            await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_HelpMore));
+            await HelpMoreAsync(context);
             context.Wait(MessageReceived);
         }
 
@@ -84,7 +85,7 @@ namespace BotService.Dialogs
                 }
                 else
                 {
-                    await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_HelpMore));
+                    await HelpMoreAsync(context);
                 }
             }
             catch (TooManyAttemptsException)
@@ -112,6 +113,7 @@ namespace BotService.Dialogs
                     await context.PostAsync(TextProvider.Provide(TextCategory.BRANCHAPPOINTMENT_BookingSaved));
                 }
             }
+            await HelpMoreAsync(context);
         }
 
         private async Task ResumeAfterSearchBranchDialogForBookingAsync(IDialogContext context, IAwaitable<object> result)
@@ -123,6 +125,12 @@ namespace BotService.Dialogs
         private async Task AskForAccurateInput(IDialogContext context)
         {
             await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_AskingMoreAccurateInput));
+        }
+
+        private async Task HelpMoreAsync(IDialogContext context)
+        {
+            await context.PostAsync(
+                TextProvider.Provide(TextCategory.COMMON_HelpMore));
         }
     }
 }

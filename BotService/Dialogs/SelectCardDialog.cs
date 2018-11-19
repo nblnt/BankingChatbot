@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BankingChatbot.TextStorage;
 using BankingChatBot.DAL.EntityFramework.Model;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Resource;
 using Microsoft.Bot.Connector;
 
 namespace BotService.Dialogs
@@ -17,7 +18,7 @@ namespace BotService.Dialogs
             List<DebitCard> clientDebitCards = DAL.GetClientDebitCards(1);
 
             IMessageActivity selectCardReply = context.MakeMessage();
-            //itt állítjuk be, hogy görgethető legyen
+            //itt állítjuk be, hogy görgethető legyen a menüsor
             selectCardReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             selectCardReply.Text = TextProvider.Provide(TextCategory.SELECTCARD_PleaseSelect);
             selectCardReply.Attachments = new List<Attachment>();
@@ -27,8 +28,7 @@ namespace BotService.Dialogs
                 List<CardImage> cardImages = new List<CardImage>();
                 List<CardAction> cardButtons = new List<CardAction>();
 
-                cardImages.Add(new CardImage(
-                    "https://www.mastercard.co.uk/en-gb/businesses/mid-large/travel-expense-solutions/cards/corporate/_jcr_content/contentpar/herolight/image.adaptive.479.high.png/1472151978867.png"));
+                cardImages.Add(new CardImage("https://image.ibb.co/jPo20L/mastercard-blue.png"));
 
                 cardButtons.Add(new CardAction(ActionTypes.PostBack, "Select", value: card.DebitCardId.ToString()));
 

@@ -15,8 +15,7 @@ namespace BankingChatbot.TextStorage
 
         public static string Provide(TextCategory category, int specifiedTextIndex = -1)
         {
-            TextStorageItem textsByCategory = Storage.Storage
-                .SingleOrDefault(x => x.Category == category);
+            TextStorageItem textsByCategory = Storage.Storage.SingleOrDefault(x => x.Category == category);
             if (textsByCategory != null)
             {
                 int maxIndex = textsByCategory.Texts.Count;
@@ -38,7 +37,7 @@ namespace BankingChatbot.TextStorage
                         $" is out of this range");
                 }
                 string retVal = textsByCategory.Texts[index];
-                return retVal;                
+                return retVal;
             }
             throw new Exception("An error occured while resolve text data from text storage");
         }

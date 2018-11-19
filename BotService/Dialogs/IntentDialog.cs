@@ -10,17 +10,18 @@ using Microsoft.Bot.Connector;
 namespace BotService.Dialogs
 {
     [Serializable]
-    [LuisModel("86814b35-602d-4b50-91c1-280144f8e9b5", "5754ccecd67d462a95192fbce4209492")]
+    [LuisModel("86814b35-602d-4b50-91c1-280144f8e9b5",
+        "5754ccecd67d462a95192fbce4209492")]
     public partial class IntentDialog : LuisDialog<object>
     {
         private int _clientId = Properties.Settings.Default.MockClientId;
 
         [LuisIntent("Greeting")]
         public async Task GreetAsync(IDialogContext context, LuisResult result)
-        {            
+        {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                await context.PostAsync(TextProvider.Provide(TextCategory.GREETING));                
+                await context.PostAsync(TextProvider.Provide(TextCategory.GREETING));
             }
             else
             {
@@ -34,7 +35,8 @@ namespace BotService.Dialogs
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
                 Activity message = new Activity(text: result.Query);
-                await context.Forward(new AccountBalanceDialog(_clientId), ResumeAfterChildDialogAsync, message);
+                await context.Forward(new AccountBalanceDialog(_clientId),
+                    ResumeAfterChildDialogAsync, message);
             }
             else
             {
@@ -53,7 +55,7 @@ namespace BotService.Dialogs
             else
             {
                 await AskForAccurateInput(context);
-            }            
+            }
         }
 
         [LuisIntent("SetCardLimit")]
