@@ -52,8 +52,8 @@ namespace BotService.Dialogs
         private async Task ResumeAfterLimitChangedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             string newLimitAsString = (await result).Text;
-            int newLimit;
-            if (!int.TryParse(newLimitAsString, out newLimit))
+            bool success = int.TryParse(newLimitAsString, out int newLimit);
+            if (!success || newLimit <= 0)
             {
                 await context.PostAsync(TextProvider.Provide(TextCategory.SETCARDLIMIT_InvalidAmount));
                 context.Wait(ResumeAfterLimitChangedAsync);
@@ -86,8 +86,6 @@ namespace BotService.Dialogs
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-
-
                 context.Done(modificationResult);
             }
         }

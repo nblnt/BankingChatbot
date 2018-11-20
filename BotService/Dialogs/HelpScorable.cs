@@ -46,8 +46,6 @@ namespace BotService.Dialogs
         protected override async Task PostAsync(IActivity item, string state, CancellationToken token)
         {
             InterruptionDialog helpInterruptionDialog = new InterruptionDialog(TextProvider.Provide(TextCategory.INTERRUPTION_Help));
-            //todo: erről olvass majd
-            //valószínűleg ez egy olyan hívás, ami ignorálja hívott dialog eredményét, és folytatja itt a futást
             IDialog<IMessageActivity> helpInterruption = helpInterruptionDialog.Void<object, IMessageActivity>();
             task.Call(helpInterruption, null);
             //await task.PollAsync(token);

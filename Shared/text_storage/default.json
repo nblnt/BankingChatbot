@@ -16,8 +16,7 @@
     {
       "category": "GREETING_UserAdded",
       "texts": [
-        "Welcome! Can I help you!",
-        "Welcome! What can I do for you?"
+        "Hi! I am your helper chatbot! What can I do for you?\nYou can choose:\n-Get your account balance\n-Get your card limits\n-Change your card limits\n-Search for branches\n-Book an appointment to our branches!"
       ]
     },
     {

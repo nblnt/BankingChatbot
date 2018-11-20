@@ -53,12 +53,11 @@ namespace BotService.Dialogs
             IDialog<IMessageActivity> cancelInterruption = cancelInterruptionDialog.Void<object, IMessageActivity>();
             task.Call(cancelInterruption, null);
             task.Reset();
-            //await task.PollAsync(token);
         }
 
         //ez fut le a végén, dispose-ok ajánlottak ide
         protected override Task DoneAsync(IActivity item, string state, CancellationToken token)
-        {
+        {            
             return Task.CompletedTask;
         }
     }

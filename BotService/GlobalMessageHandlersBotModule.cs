@@ -13,12 +13,14 @@ namespace BotService
             base.Load(builder);
 
             builder
-                .Register(c => new CancelScorable(c.Resolve<IDialogTask>()))
+                .Register(c => new CancelScorable(
+                    c.Resolve<IDialogTask>()))
                 .As<IScorable<IActivity, double>>()
                 .InstancePerLifetimeScope();
 
             builder
-                .Register(c => new HelpScorable(c.Resolve<IDialogTask>()))
+                .Register(c => new HelpScorable(
+                    c.Resolve<IDialogTask>()))
                 .As<IScorable<IActivity, double>>()
                 .InstancePerLifetimeScope();
         }

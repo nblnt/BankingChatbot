@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BankingChatbot.Commons.Enum;
@@ -29,7 +30,7 @@ namespace BotService.Dialogs
 
         private int? _selectedCardId;
 
-        private CardLimitType _cardLimitType;
+        private CardLimitType? _cardLimitType;
 
         public SetCardLimitInitializationDialog(int clientId)
         {
@@ -71,7 +72,18 @@ namespace BotService.Dialogs
                     CreateLimitTypeChoice(context);
                     break;
                 case Options.ClientAndLimitTypeSelected:
-                    context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync);
+                    if (_userDebitCards.Count > 1)
+                    {
+                        context.Call(new SelectCardDialog(), ResumeAfterSelectCardDialogAsync); 
+                    }
+                    else
+                    {
+                        _selectedCardId = _userDebitCards.Select(x => x.DebitCardId).Single();
+                        context.Call(
+                            new SetCardLimitDialog(
+                                _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
+                                (CardLimitType)_cardLimitType), ResumeAfterSetCardLimitDialogAsync);
+                    }
                     break;
                 default:
                     context.Done(false);
@@ -82,7 +94,17 @@ namespace BotService.Dialogs
         private async Task ResumeAfterSelectCardDialogAsync(IDialogContext context, IAwaitable<int> result)
         {
             _selectedCardId = await result;
-            CreateLimitTypeChoice(context);
+            if (!_cardLimitType.HasValue)
+            {
+                CreateLimitTypeChoice(context);
+            }
+            else
+            {
+                context.Call(
+                    new SetCardLimitDialog(
+                        _selectedCardId ?? throw new NullReferenceException("The selected card identifier is invalid!"),
+                        (CardLimitType)_cardLimitType), ResumeAfterSetCardLimitDialogAsync);
+            }
         }
 
         private void CreateLimitTypeChoice(IDialogContext context)
@@ -102,7 +124,7 @@ namespace BotService.Dialogs
         private async Task ResumeAfterLimitTypeChoiceAsync(IDialogContext context, IAwaitable<CardLimitType> result)
         {
             _cardLimitType = await result;
-            if (_cardLimitType == CardLimitType.Both || _cardLimitType == CardLimitType.PurchaseLimit )
+            if (_cardLimitType == CardLimitType.Both || _cardLimitType == CardLimitType.PurchaseLimit)
             {
                 context.Call(
                     new SetCardLimitDialog(
@@ -136,7 +158,7 @@ namespace BotService.Dialogs
         private async Task ResumeAfterSetBothCardLimitDialogAsync(IDialogContext context, IAwaitable<CardLimitModificationResult> result)
         {
             CardLimitModificationResult modificationResult = await result;
-            if (modificationResult.WithDrawalLimitChanged != null && (bool) modificationResult.WithDrawalLimitChanged)
+            if (modificationResult.WithDrawalLimitChanged != null && (bool)modificationResult.WithDrawalLimitChanged)
             {
                 context.Done(true);
             }

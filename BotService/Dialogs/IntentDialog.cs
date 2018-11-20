@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using BankingChatbot.Commons.Enum;
 using BankingChatbot.TextStorage;
 using BotService.Properties;
 using Microsoft.Bot.Builder.Dialogs;
@@ -63,7 +66,19 @@ namespace BotService.Dialogs
         {
             if (CheckMinimumIntentScore(result.TopScoringIntent.Score))
             {
-                context.Call(new SetCardLimitInitializationDialog(_clientId), ResumeAfterSetCardLimitInitializationDialogAsync);
+                if (result.Entities.Any())
+                {
+                    IEnumerable<string> limitType = result.Entities.Select(x => x.Entity);
+                    context.Call(
+                        limitType.Any(x => x.Contains("withdrawal"))
+                            ? new SetCardLimitInitializationDialog(_clientId, CardLimitType.CashWithdrawalLimit)
+                            : new SetCardLimitInitializationDialog(_clientId, CardLimitType.PurchaseLimit),
+                        ResumeAfterSetCardLimitInitializationDialogAsync);
+                }
+                else
+                {
+                    context.Call(new SetCardLimitInitializationDialog(_clientId), ResumeAfterSetCardLimitInitializationDialogAsync);
+                }
             }
             else
             {
