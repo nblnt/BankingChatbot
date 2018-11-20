@@ -15,7 +15,7 @@ namespace BotService.Dialogs
         private async Task ResumeAfterChildDialogAsync(IDialogContext context, 
             IAwaitable<object> result)
         {
-            await HelpMoreAsync(context);
+            await HelpMore(context);
             context.Wait(MessageReceived);
         }
 
@@ -63,6 +63,7 @@ namespace BotService.Dialogs
             }
 
             context.PrivateConversationData.RemoveValue("selectedCardId");
+            await HelpMore(context);
         }
 
         private async Task ResumeAfterSearchBranchDialogAsync(IDialogContext context, IAwaitable<object> result)
@@ -85,7 +86,7 @@ namespace BotService.Dialogs
                 }
                 else
                 {
-                    await HelpMoreAsync(context);
+                    await HelpMore(context);
                 }
             }
             catch (TooManyAttemptsException)
@@ -113,7 +114,7 @@ namespace BotService.Dialogs
                     await context.PostAsync(TextProvider.Provide(TextCategory.BRANCHAPPOINTMENT_BookingSaved));
                 }
             }
-            await HelpMoreAsync(context);
+            await HelpMore(context);
         }
 
         private async Task ResumeAfterSearchBranchDialogForBookingAsync(IDialogContext context, IAwaitable<object> result)
@@ -127,7 +128,7 @@ namespace BotService.Dialogs
             await context.PostAsync(TextProvider.Provide(TextCategory.COMMON_AskingMoreAccurateInput));
         }
 
-        private async Task HelpMoreAsync(IDialogContext context)
+        private async Task HelpMore(IDialogContext context)
         {
             await context.PostAsync(
                 TextProvider.Provide(TextCategory.COMMON_HelpMore));
