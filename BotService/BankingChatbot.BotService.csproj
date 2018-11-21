@@ -159,6 +159,7 @@
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="BotService.bot" />
+    <None Include="Properties\PublishProfiles\BankingChatbotBotService20181121062526 - Web Deploy.pubxml" />
     <None Include="Resources\mastercard_blue.png" />
     <None Include="Resources\MasterCardBlue.bmp" />
     <None Include="Resources\blue-location-icon.png" />

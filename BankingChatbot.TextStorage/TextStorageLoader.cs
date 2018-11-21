@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net;
 using BankingChatbot.TextStorage.Properties;
 using Newtonsoft.Json;
 
@@ -14,13 +15,23 @@ namespace BankingChatbot.TextStorage
 
         public TextStorageLoader()
         {
-            _filePath = Settings.Default.TextStoragePath;
-            using (StreamReader streamReader = new StreamReader(_filePath))
+            if (Settings.Default.UsingLocal)
             {
-                _textFile = streamReader.ReadToEnd();
-                Storage = JsonConvert
-                    .DeserializeObject<TextStorage>(_textFile);
+                _filePath = Settings.Default.TextStorageLocalPath;
+                using (StreamReader streamReader = new StreamReader(_filePath))
+                {
+                    _textFile = streamReader.ReadToEnd();                    
+                } 
             }
+            else
+            {
+                using (WebClient client = new WebClient())
+                {
+                    _textFile = client.DownloadString(Settings.Default.TextStorageAzureUri);
+                }
+            }
+            Storage = JsonConvert
+                .DeserializeObject<TextStorage>(_textFile);
         }
     }
 }

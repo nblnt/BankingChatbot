@@ -2,8 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BankingChatbot.TextStorage.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TextStoragePath" Type="System.String" Scope="Application">
+    <Setting Name="TextStorageLocalPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\Balint\Source\Repos\BotService\Shared\text_storage\default.json</Value>
+    </Setting>
+    <Setting Name="UsingLocal" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TextStorageAzureUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://bankingchatbotdemo.file.core.windows.net/textstorage/default.json?sv=2017-11-09&amp;ss=f&amp;srt=sco&amp;sp=rc&amp;se=2020-11-22T03:54:59Z&amp;st=2018-11-21T19:54:59Z&amp;spr=https&amp;sig=ObRtywN56JJATQr1t%2FNlkWyREYAtPDAj6RkqLDs9Ub4%3D</Value>
     </Setting>
   </Settings>
 </SettingsFile>

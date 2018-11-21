@@ -26,9 +26,29 @@ namespace BankingChatbot.TextStorage.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Balint\\Source\\Repos\\BotService\\Shared\\text_storage\\default.json")]
-        public string TextStoragePath {
+        public string TextStorageLocalPath {
             get {
-                return ((string)(this["TextStoragePath"]));
+                return ((string)(this["TextStorageLocalPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UsingLocal {
+            get {
+                return ((bool)(this["UsingLocal"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://bankingchatbotdemo.file.core.windows.net/textstorage/default.json?sv=2017" +
+            "-11-09&ss=f&srt=sco&sp=rc&se=2020-11-22T03:54:59Z&st=2018-11-21T19:54:59Z&spr=ht" +
+            "tps&sig=ObRtywN56JJATQr1t%2FNlkWyREYAtPDAj6RkqLDs9Ub4%3D")]
+        public string TextStorageAzureUri {
+            get {
+                return ((string)(this["TextStorageAzureUri"]));
             }
         }
     }
