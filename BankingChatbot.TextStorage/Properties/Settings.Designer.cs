@@ -12,7 +12,7 @@ namespace BankingChatbot.TextStorage.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace BankingChatbot.TextStorage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Balint\\Source\\Repos\\BotService\\Shared\\text_storage\\default.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"text_storage\\default.json\"")]
         public string TextStorageLocalPath {
             get {
                 return ((string)(this["TextStorageLocalPath"]));
@@ -34,7 +34,7 @@ namespace BankingChatbot.TextStorage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UsingLocal {
             get {
                 return ((bool)(this["UsingLocal"]));
@@ -43,9 +43,7 @@ namespace BankingChatbot.TextStorage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://bankingchatbotdemo.file.core.windows.net/textstorage/default.json?sv=2017" +
-            "-11-09&ss=f&srt=sco&sp=rc&se=2020-11-22T03:54:59Z&st=2018-11-21T19:54:59Z&spr=ht" +
-            "tps&sig=ObRtywN56JJATQr1t%2FNlkWyREYAtPDAj6RkqLDs9Ub4%3D")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://geekclub.hu/textstorage/default.json")]
         public string TextStorageAzureUri {
             get {
                 return ((string)(this["TextStorageAzureUri"]));

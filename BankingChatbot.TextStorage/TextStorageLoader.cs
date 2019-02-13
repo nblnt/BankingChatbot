@@ -17,11 +17,12 @@ namespace BankingChatbot.TextStorage
         {
             if (Settings.Default.UsingLocal)
             {
-                _filePath = Settings.Default.TextStorageLocalPath;
-                using (StreamReader streamReader = new StreamReader(_filePath))
-                {
-                    _textFile = streamReader.ReadToEnd();                    
-                } 
+                //_filePath = Settings.Default.TextStorageLocalPath;
+                //using (StreamReader streamReader = new StreamReader(_filePath))
+                //{
+                //    _textFile = streamReader.ReadToEnd();                    
+                //} 
+                _textFile = System.Text.Encoding.Default.GetString(Resources._default);
             }
             else
             {

@@ -17,5 +17,11 @@
     <Setting Name="MockClientId" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="MicrosoftAppId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1e5d813b-0f73-4b00-9dcc-dcc101418075</Value>
+    </Setting>
+    <Setting Name="MicrosoftAppPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">svckuZXHRP231:~%[yoUI79</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
